@@ -7,9 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B73EC237205A877700879A48 /* Wall.swift in Sources */ = {isa = PBXBuildFile; fileRef = B73EC236205A877700879A48 /* Wall.swift */; };
+		B73EC239205AA47A00879A48 /* Ground.swift in Sources */ = {isa = PBXBuildFile; fileRef = B73EC238205AA47A00879A48 /* Ground.swift */; };
+		B73EC23B205AA48500879A48 /* Character.swift in Sources */ = {isa = PBXBuildFile; fileRef = B73EC23A205AA48500879A48 /* Character.swift */; };
 		B7AA39E1205A6EFD00ABE655 /* TileSerivce.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7AA39E0205A6EFD00ABE655 /* TileSerivce.swift */; };
-		B7AA39E3205A745700ABE655 /* Direction.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7AA39E2205A745700ABE655 /* Direction.swift */; };
-		B7AA39E5205A746300ABE655 /* Action.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7AA39E4205A746300ABE655 /* Action.swift */; };
+		B7AA39E3205A745700ABE655 /* TileEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7AA39E2205A745700ABE655 /* TileEnum.swift */; };
 		B7B1475B2059B9E1000D0877 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7B1475A2059B9E1000D0877 /* AppDelegate.swift */; };
 		B7B1475F2059B9E1000D0877 /* Actions.sks in Resources */ = {isa = PBXBuildFile; fileRef = B7B1475E2059B9E1000D0877 /* Actions.sks */; };
 		B7B147632059B9E1000D0877 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7B147622059B9E1000D0877 /* GameViewController.swift */; };
@@ -22,7 +24,6 @@
 		B7B147942059CB97000D0877 /* Tile.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7B147932059CB97000D0877 /* Tile.swift */; };
 		B7B147962059CF17000D0877 /* sprites.atlas in Resources */ = {isa = PBXBuildFile; fileRef = B7B147952059CF17000D0877 /* sprites.atlas */; };
 		B7B147982059D069000D0877 /* PointUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7B147972059D069000D0877 /* PointUtils.swift */; };
-		B7B1479A2059D8BE000D0877 /* Texture.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7B147992059D8BE000D0877 /* Texture.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -43,9 +44,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		B73EC236205A877700879A48 /* Wall.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Wall.swift; sourceTree = "<group>"; };
+		B73EC238205AA47A00879A48 /* Ground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ground.swift; sourceTree = "<group>"; };
+		B73EC23A205AA48500879A48 /* Character.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Character.swift; sourceTree = "<group>"; };
 		B7AA39E0205A6EFD00ABE655 /* TileSerivce.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TileSerivce.swift; sourceTree = "<group>"; };
-		B7AA39E2205A745700ABE655 /* Direction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Direction.swift; sourceTree = "<group>"; };
-		B7AA39E4205A746300ABE655 /* Action.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Action.swift; sourceTree = "<group>"; };
+		B7AA39E2205A745700ABE655 /* TileEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TileEnum.swift; sourceTree = "<group>"; };
 		B7B147572059B9E1000D0877 /* FireInTheWhole.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FireInTheWhole.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B7B1475A2059B9E1000D0877 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B7B1475E2059B9E1000D0877 /* Actions.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Actions.sks; sourceTree = "<group>"; };
@@ -64,7 +67,6 @@
 		B7B147932059CB97000D0877 /* Tile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tile.swift; sourceTree = "<group>"; };
 		B7B147952059CF17000D0877 /* sprites.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = sprites.atlas; sourceTree = "<group>"; };
 		B7B147972059D069000D0877 /* PointUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointUtils.swift; sourceTree = "<group>"; };
-		B7B147992059D8BE000D0877 /* Texture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Texture.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -161,9 +163,10 @@
 			isa = PBXGroup;
 			children = (
 				B7B147932059CB97000D0877 /* Tile.swift */,
-				B7B147992059D8BE000D0877 /* Texture.swift */,
-				B7AA39E2205A745700ABE655 /* Direction.swift */,
-				B7AA39E4205A746300ABE655 /* Action.swift */,
+				B7AA39E2205A745700ABE655 /* TileEnum.swift */,
+				B73EC236205A877700879A48 /* Wall.swift */,
+				B73EC238205AA47A00879A48 /* Ground.swift */,
+				B73EC23A205AA48500879A48 /* Character.swift */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -305,10 +308,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				B7B147982059D069000D0877 /* PointUtils.swift in Sources */,
-				B7AA39E5205A746300ABE655 /* Action.swift in Sources */,
-				B7B1479A2059D8BE000D0877 /* Texture.swift in Sources */,
+				B73EC237205A877700879A48 /* Wall.swift in Sources */,
+				B73EC23B205AA48500879A48 /* Character.swift in Sources */,
 				B7AA39E1205A6EFD00ABE655 /* TileSerivce.swift in Sources */,
-				B7AA39E3205A745700ABE655 /* Direction.swift in Sources */,
+				B73EC239205AA47A00879A48 /* Ground.swift in Sources */,
+				B7AA39E3205A745700ABE655 /* TileEnum.swift in Sources */,
 				B7B1478F2059C9CD000D0877 /* GameScene.swift in Sources */,
 				B7B147632059B9E1000D0877 /* GameViewController.swift in Sources */,
 				B7B1475B2059B9E1000D0877 /* AppDelegate.swift in Sources */,
