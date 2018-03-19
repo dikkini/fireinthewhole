@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VariablesViewState
+   version = "1.0">
+   <ContextStates>
+      <ContextState
+         contextName = "GameScene.traversableTiles():GameScene.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "tTiles">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "GameScene.getTileAtPosition(xPos:yPos:):GameScene.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "Int(Int(y - (Int(_gridLowerLeftCorner.y))) / Int(_gridHeight) * Int(_numRows))">
+            </PersistentString>
+            <PersistentString
+               value = "Int = Int(Int(x - (Int(_gridLowerLeftCorner.x))) / Int(_gridWidth) * Int(_numCols))">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "TileService.createMap():TileSerivce.swift">
+      </ContextState>
+      <ContextState
+         contextName = "GameScene.init(size:):GameScene.swift">
+      </ContextState>
+      <ContextState
+         contextName = "GameScene.touchesEnded(_:with:):GameScene.swift">
+      </ContextState>
+      <ContextState
+         contextName = "TileService.placeTile2D(view:tile:position:):TileSerivce.swift">
+      </ContextState>
+   </ContextStates>
+</VariablesViewState>

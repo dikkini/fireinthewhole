@@ -8,63 +8,64 @@
 import Foundation
 import SpriteKit
 
-class Tile {
-    var sprite2D:SKSpriteNode!
-    var spriteIso:SKSpriteNode!
+class Tile: SKSpriteNode {
+    internal var type: TileType
+    internal var direction: TileDirection?
+    internal var action: TileAction
+    internal var imagePrefix: String?
+    internal var canMove: Bool?
     
-    var properties: TileProperties
-    
-    init(properties: TileProperties) {
-        self.properties = properties
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
-    func changeAction(action: TileAction) {
-        self.properties.action = action
+    init(type: TileType, direction: TileDirection? = nil, action: TileAction = TileAction.Idle, imagePrefix: String? = nil, canMove: Bool? = false) {
+        self.type = type
+        self.direction = direction
+        self.action = action
+        self.imagePrefix = imagePrefix
+        self.canMove = canMove
+        super.init(texture: self.getTileTexture(), color: .clear, size: self.getTileTexture().size())
     }
     
     func changeDirection(direction: TileDirection) {
-        self.properties.direction = direction
-    }
-    
-    func turnLeft() {
-        // TODO изменить направление и вместе с этим изменить изображение тайла с новым направлением
-    }
-    
-    func turnRight() {
-        // TODO изменить направление и вместе с этим изменить изображение тайла с новым направлением
-    }
-    
-    private func turn() {
-        // TODO общий метод для поворотов тайла
+        self.direction = direction
+        self.update()
     }
     
     // метод обновления тайла
     func update() {
-        if (self.sprite2D != nil) {
-            self.sprite2D.texture =  SKTexture(imageNamed: self.properties.image())
-        }
-        if (self.spriteIso != nil) {
-            self.spriteIso.texture = SKTexture(imageNamed: "iso_3d_" + self.properties.image())
-        }
-    }
-}
-
-struct TileProperties {
-    internal var type: TileType
-    internal var direction: TileDirection?
-    internal var action: TileAction?
-    
-    init(type: TileType, direction: TileDirection? = nil, action: TileAction? = nil) {
-        self.type = type
-        self.direction = direction
-        self.action = action
+        self.texture = self.getTileTexture()
     }
     
-    func image() -> String {
-        var image = self.type.name
+    func getTileTexture() -> SKTexture {
+        var image: String
+        if self.imagePrefix != nil {
+            image = self.imagePrefix! + self.type.name
+        } else {
+            image = self.type.name
+        }
+        
         if self.direction != nil {
             image += "_" + self.direction!.name
         }
-        return image
+        image += ".png"
+        return SKTexture(imageNamed: image)
+    }
+}
+
+struct TileLocation {
+    var point2D: CGPoint
+    var point25D: CGPoint
+    
+    init(point2D: CGPoint, pointIso: CGPoint) {
+        self.point2D = point2D
+        self.point25D = pointIso
+    }
+}
+
+extension TileLocation: CustomDebugStringConvertible {
+    var debugDescription: String {
+        return "TileLocation(point2D: \(self.point2D), pointIso: \(self.point25D))"
     }
 }
