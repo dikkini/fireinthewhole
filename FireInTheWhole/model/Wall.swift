@@ -9,8 +9,8 @@ import Foundation
 import SpriteKit
 
 class Wall: Tile {
-    override init(type: TileType, direction: TileDirection? = nil, action: TileAction, imagePrefix: String? = nil, canMove: Bool? = false) {
-        super.init(type: type, direction: direction, action: action, imagePrefix: imagePrefix, canMove: canMove)
+    override init(type: TileType, action: TileAction, direction: TileDirection? = nil, imagePrefix: String? = nil, canMove: Bool? = false) {
+        super.init(type: type, action: action, direction: direction, imagePrefix: imagePrefix, canMove: canMove)
     }
     
     required init?(coder aDecoder: NSCoder) {

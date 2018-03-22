@@ -35,14 +35,13 @@ class TileService {
             tile2D.changeDirection(direction: moveDirection)
         }
         
-        print("Move tile " + tile25D.debugDescription + " to " + location.debugDescription)
         let action25D = SKAction.move(to: location.point25D, duration: 1)
         tile25D.run(action25D)
         
         let action2D = SKAction.move(to: location.point2D, duration: 1)
         tile2D.run(action2D)
     }
-    
+
     func calculateTileLocationOnLayer(tileName: String, layer: SKNode) -> TileLocation {
         let tile2D = layer.childNode(withName: tileName)
         let tilePoint2D = tile2D!.position
@@ -90,6 +89,7 @@ class TileService {
             var tileRow: [Int] = []
             for j in 0..<mapRows {
                 let groundName = NSUUID().uuidString
+                //var ground = Ground.init(type: TileType.Ground, action: TileAction.Idle)
                 var ground = Ground.init(type: TileType.Ground, action: TileAction.Idle, imagePrefix: nil)
                 ground.name = groundName
                 ground.position = CGPoint(x: (j * tileSize.width), y: -(i * tileSize.height))
@@ -106,13 +106,13 @@ class TileService {
 
                 if (i == 2 && j == 1) || (i == 4 && j == 3) {
                     let charName = NSUUID().uuidString
-                    let char2d = Character.init(type: TileType.Character, direction: TileDirection.E, action: TileAction.Idle, imagePrefix: nil, canMove: true)
+                    let char2d = Character.init(type: TileType.Character, action: TileAction.Idle, direction: TileDirection.E, imagePrefix: nil, canMove: true)
                     char2d.name = charName
                     char2d.position = CGPoint(x: (j * tileSize.width), y: -(i * tileSize.height))
                     char2d.anchorPoint = CGPoint(x: 0, y: 0)
                     mapCharactersLayer.addChild(char2d)
                     
-                    let charIso = Character.init(type: TileType.Character, direction: TileDirection.E, action: TileAction.Idle, imagePrefix: "iso_3d_", canMove: true)
+                    let charIso = Character.init(type: TileType.Character, action: TileAction.Idle, direction: TileDirection.E, imagePrefix: "iso_3d_", canMove: true)
                     charIso.name = charName
                     charIso.position = point2DTo25D(p: CGPoint(x: (j * tileSize.width), y: -(i * tileSize.height)))
                     charIso.anchorPoint = CGPoint(x: 0, y: 0)

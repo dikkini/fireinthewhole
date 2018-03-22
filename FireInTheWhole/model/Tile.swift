@@ -10,8 +10,8 @@ import SpriteKit
 
 class Tile: SKSpriteNode {
     internal var type: TileType
-    internal var direction: TileDirection?
     internal var action: TileAction
+    internal var direction: TileDirection?
     internal var imagePrefix: String?
     internal var canMove: Bool?
     
@@ -19,7 +19,7 @@ class Tile: SKSpriteNode {
         fatalError("init(coder:) has not been implemented")
     }
     
-    init(type: TileType, direction: TileDirection? = nil, action: TileAction = TileAction.Idle, imagePrefix: String? = nil, canMove: Bool? = false) {
+    init(type: TileType, action: TileAction = TileAction.Idle, direction: TileDirection? = nil, imagePrefix: String? = nil, canMove: Bool? = false) {
         self.type = type
         self.direction = direction
         self.action = action
@@ -52,6 +52,16 @@ class Tile: SKSpriteNode {
         image += ".png"
         return SKTexture(imageNamed: image)
     }
+    
+    func compassDirection(degrees: CGFloat) {
+        var n_degrees = degrees
+        if n_degrees < 0 { n_degrees += 360 }
+        
+        let directions = [TileDirection.N, TileDirection.NE, TileDirection.E, TileDirection.SE, TileDirection.S, TileDirection.SW, TileDirection.W, TileDirection.NW]
+        let index = Int((n_degrees + 22.5) / 45.0) & 7
+        let d = directions[index]
+        self.changeDirection(direction: d)
+    }
 }
 
 struct TileLocation {
@@ -64,8 +74,3 @@ struct TileLocation {
     }
 }
 
-extension TileLocation: CustomDebugStringConvertible {
-    var debugDescription: String {
-        return "TileLocation(point2D: \(self.point2D), pointIso: \(self.point25D))"
-    }
-}
