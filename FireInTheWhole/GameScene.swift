@@ -72,12 +72,14 @@ class GameScene: SKScene {
         let deviceScale = self.size.width / 667
         
         self.groundLayer2D.zPosition = 1
-        self.objectLayer2D.zPosition = 2
-        self.characterLayer2D.zPosition = 3
+        self.highlightPathLayer2D.zPosition = 2
+        self.objectLayer2D.zPosition = 3
+        self.characterLayer2D.zPosition = 4
         
         self.groundLayer25D.zPosition = 1
-        self.objectLayer25D.zPosition = 2
-        self.characterLayer25D.zPosition = 3
+        self.highlightPathLayer25D.zPosition = 2
+        self.objectLayer25D.zPosition = 3
+        self.characterLayer25D.zPosition = 4
 
         self.view2D.position = CGPoint(x: -self.size.width * 0.48, y: self.size.height * 0.43)
         let view2DScale = CGFloat(0.4)
@@ -97,6 +99,7 @@ class GameScene: SKScene {
         self.view25D.addChild(self.groundLayer25D)
         self.view25D.addChild(self.objectLayer25D)
         self.view25D.addChild(self.characterLayer25D)
+        self.view25D.addChild(self.highlightPathLayer25D)
         self.addChild(self.view25D)
     }
     
@@ -114,6 +117,72 @@ class GameScene: SKScene {
             // ищем character на 2D плоскости
             let charName = self.selectedCharacter25D!.name!
             self.selectedCharacter2D = self.characterLayer2D.childNode(withName: charName) as? Character
+            
+            
+            // clean path
+            self.highlightPathLayer25D.removeAllChildren()
+            self.highlightPathLayer2D.removeAllChildren()
+
+            var moves = self.selectedCharacter2D?.getPossibleMoveTileIndexList()
+
+            // invert y axis
+            var nmoves: [CGPoint] = []
+            for move in moves! {
+                if move.y > 0 {
+                    let index = moves?.index(of: move)
+                    moves?.remove(at: index!)
+                }
+            }
+            
+            for var moveTI in moves! {
+                let move2DPoint = pointTileIndexToPoint2D(point: moveTI, tileSize: tileSize)
+                print("2D point: " + move2DPoint.debugDescription)
+
+                let moveGround2DPoint = self.groundLayer2D.convert(move2DPoint, from: self.characterLayer2D)
+                print("Ground 2D point: " + moveGround2DPoint.debugDescription)
+                let move2DGroundTile = self.groundLayer2D.atPoint(move2DPoint)
+                print("Found Tile on 2D ground layer: " + move2DGroundTile.debugDescription)
+                let groundTile = move2DGroundTile as? Ground
+                if (groundTile == nil) {
+                    print("No such 2D Ground")
+                    continue
+                }
+                
+                let charMove2DPoint = self.groundLayer2D.convert(move2DPoint, to: self.characterLayer2D)
+                print("Character 2D point: " + moveGround2DPoint.debugDescription)
+                let move2DCharacterTile = self.characterLayer2D.atPoint(charMove2DPoint)
+                print("Found Tile on 2D character layer: " + move2DCharacterTile.debugDescription)
+                let characterTile = move2DCharacterTile as? Character
+                if (characterTile != nil) {
+                    print("There is character on tile")
+                    continue
+                }
+                
+
+                print("\n")
+                print("\n")
+                print("\n")
+
+                // 2D
+                var highlightTile = Ground.init(type: TileType.Ground, action: TileAction.Idle, imagePrefix: nil)
+                highlightTile.position = move2DPoint
+                highlightTile.anchorPoint = CGPoint(x: 0, y: 0)
+
+                highlightTile.color = SKColor(red: 1.0, green: 0, blue: 0, alpha: 0.25)
+                highlightTile.colorBlendFactor = 1.0
+
+                self.highlightPathLayer2D.addChild(highlightTile)
+
+                // 25D
+                highlightTile = Ground.init(type: TileType.Ground, action: TileAction.Idle, imagePrefix: "iso_")
+                highlightTile.position = point2DTo25D(p: move2DPoint)
+                highlightTile.anchorPoint = CGPoint(x: 0, y: 0)
+
+                highlightTile.color = SKColor(red: 1.0, green: 0, blue: 0, alpha: 0.25)
+                highlightTile.colorBlendFactor = 1.0
+
+                self.highlightPathLayer25D.addChild(highlightTile)
+            }
         } else if selectedIsoTile is Ground  && self.selectedCharacter25D !== nil { // персонаж выбран и выбрана земля для хода
             let tileLocation = self.tileService.calculateTileLocationOnLayer(tileName: selectedIsoTile!.name!, layer: groundLayer2D)
             do {
