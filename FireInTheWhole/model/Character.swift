@@ -48,70 +48,50 @@ class Character: Tile {
         var position = self.position
         var tileTI = point2DToPointTileIndex(point: position, tileSize: GameLogic.tileSize)
         
+        var point: CGPoint = CGPoint(x: tileTI.x, y: tileTI.y)
+        
         // x + 1, y + 1
-        var point = CGPoint(x: tileTI.x + self.moveStep, y: tileTI.y + self.moveStep)
-        var movePoint = pointTileIndexToPoint2D(point: point, tileSize: GameLogic.tileSize)
-        //movePoint = movePoint + CGPoint(x:GameLogic.tileSize.width/2, y:-GameLogic.tileSize.height/2)
-        //movePoint = movePoint + CGPoint(x:-GameLogic.tileSize.width/2, y:-GameLogic.tileSize.height/2)
-        //possibleMoveList.append(movePoint)
+        point = CGPoint(x: tileTI.x + self.moveStep, y: tileTI.y + self.moveStep)
         possibleMoveList.append(point)
         
         // x, y + 1
         point = CGPoint(x: tileTI.x, y: tileTI.y + self.moveStep)
-        movePoint = pointTileIndexToPoint2D(point: point, tileSize: GameLogic.tileSize)
-        //movePoint = movePoint + CGPoint(x:GameLogic.tileSize.width/2, y:-GameLogic.tileSize.height/2)
-        //movePoint = movePoint + CGPoint(x:-GameLogic.tileSize.width/2, y:-GameLogic.tileSize.height/2)
-        //possibleMoveList.append(movePoint)
         possibleMoveList.append(point)
         
         // x + 1 , y
         point = CGPoint(x: tileTI.x + self.moveStep, y: tileTI.y)
-        movePoint = pointTileIndexToPoint2D(point: point, tileSize: GameLogic.tileSize)
-        //movePoint = movePoint + CGPoint(x:GameLogic.tileSize.width/2, y:-GameLogic.tileSize.height/2)
-        //movePoint = movePoint + CGPoint(x:-GameLogic.tileSize.width/2, y:-GameLogic.tileSize.height/2)
-        //possibleMoveList.append(movePoint)
         possibleMoveList.append(point)
         
         // x - 1, y - 1
         point = CGPoint(x: tileTI.x - self.moveStep, y: tileTI.y - self.moveStep)
-        //movePoint = pointTileIndexToPoint2D(point: point, tileSize: GameLogic.tileSize)
-        //movePoint = movePoint + CGPoint(x:GameLogic.tileSize.width/2, y:-GameLogic.tileSize.height/2)
-        //movePoint = movePoint + CGPoint(x:-GameLogic.tileSize.width/2, y:-GameLogic.tileSize.height/2)
-        //possibleMoveList.append(movePoint)
         possibleMoveList.append(point)
         
         // x, y - 1
         point = CGPoint(x: tileTI.x, y: tileTI.y - self.moveStep)
-        movePoint = pointTileIndexToPoint2D(point: point, tileSize: GameLogic.tileSize)
-        //movePoint = movePoint + CGPoint(x:GameLogic.tileSize.width/2, y:-GameLogic.tileSize.height/2)
-        //movePoint = movePoint + CGPoint(x:-GameLogic.tileSize.width/2, y:-GameLogic.tileSize.height/2)
-        //possibleMoveList.append(movePoint)
         possibleMoveList.append(point)
         
         // x - 1, y
         point = CGPoint(x: tileTI.x - self.moveStep, y: tileTI.y)
-        movePoint = pointTileIndexToPoint2D(point: point, tileSize: GameLogic.tileSize)
-        //movePoint = movePoint + CGPoint(x:GameLogic.tileSize.width/2, y:-GameLogic.tileSize.height/2)
-        //movePoint = movePoint + CGPoint(x:-GameLogic.tileSize.width/2, y:-GameLogic.tileSize.height/2)
-        //possibleMoveList.append(movePoint)
         possibleMoveList.append(point)
         
         // x - 1, y + 1
         point = CGPoint(x: tileTI.x - self.moveStep, y: tileTI.y + self.moveStep)
-        movePoint = pointTileIndexToPoint2D(point: point, tileSize: GameLogic.tileSize)
-        //movePoint = movePoint + CGPoint(x:GameLogic.tileSize.width/2, y:-GameLogic.tileSize.height/2)
-        //movePoint = movePoint + CGPoint(x:-GameLogic.tileSize.width/2, y:-GameLogic.tileSize.height/2)
-        //possibleMoveList.append(movePoint)
         possibleMoveList.append(point)
         
         // x + 1, y - 1
         point = CGPoint(x: tileTI.x + self.moveStep, y: tileTI.y - self.moveStep)
-        movePoint = pointTileIndexToPoint2D(point: point, tileSize: GameLogic.tileSize)
-        //movePoint = movePoint + CGPoint(x:GameLogic.tileSize.width/2, y:-GameLogic.tileSize.height/2)
-        //movePoint = movePoint + CGPoint(x:-GameLogic.tileSize.width/2, y:-GameLogic.tileSize.height/2)
-        //possibleMoveList.append(movePoint)
         possibleMoveList.append(point)
 
+        
+        // TODO убрать мувы за пределы карты с учетом инвертированной осью Y
+        for move in possibleMoveList {
+            let index = possibleMoveList.index(of: move)
+            if move.y > 0 {
+                possibleMoveList.remove(at: index!)
+            } else if Int(move.y) <= -(GameLogic.mapCols) {
+                possibleMoveList.remove(at: index!)
+            }
+        }
         
         return possibleMoveList
     }

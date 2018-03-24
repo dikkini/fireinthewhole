@@ -50,10 +50,10 @@
          contextName = "GameScene.touchesEnded(_:with:):GameScene.swift">
          <PersistentStrings>
             <PersistentString
-               value = "tile.position">
+               value = "selectedGround2D.position">
             </PersistentString>
             <PersistentString
-               value = "tile.position2D">
+               value = "hlt.position">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

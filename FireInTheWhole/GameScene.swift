@@ -15,10 +15,6 @@ class GameScene: SKScene {
         fatalError("init(coder:) has not been implemented")
     }
 
-
-    // TODO куда вынести размер одного тайла? определять автоматически?
-    let tileSize = (width: 32, height: 32)
-
     // TODO куда выносить виды?
     let view2D: SKSpriteNode
     let view25D: SKSpriteNode
@@ -117,82 +113,84 @@ class GameScene: SKScene {
             // ищем character на 2D плоскости
             let charName = self.selectedCharacter25D!.name!
             self.selectedCharacter2D = self.characterLayer2D.childNode(withName: charName) as? Character
-            
-            
-            // clean path
-            self.highlightPathLayer25D.removeAllChildren()
-            self.highlightPathLayer2D.removeAllChildren()
 
             var moves = self.selectedCharacter2D?.getPossibleMoveTileIndexList()
-
-            // invert y axis
-            var nmoves: [CGPoint] = []
-            for move in moves! {
-                if move.y > 0 {
-                    let index = moves?.index(of: move)
-                    moves?.remove(at: index!)
-                }
-            }
             
-            for var moveTI in moves! {
-                let move2DPoint = pointTileIndexToPoint2D(point: moveTI, tileSize: tileSize)
-                print("2D point: " + move2DPoint.debugDescription)
-
-                let moveGround2DPoint = self.groundLayer2D.convert(move2DPoint, from: self.characterLayer2D)
-                print("Ground 2D point: " + moveGround2DPoint.debugDescription)
-                let move2DGroundTile = self.groundLayer2D.atPoint(move2DPoint)
-                print("Found Tile on 2D ground layer: " + move2DGroundTile.debugDescription)
-                let groundTile = move2DGroundTile as? Ground
-                if (groundTile == nil) {
-                    print("No such 2D Ground")
-                    continue
-                }
-                
-                let charMove2DPoint = self.groundLayer2D.convert(move2DPoint, to: self.characterLayer2D)
-                print("Character 2D point: " + moveGround2DPoint.debugDescription)
-                let move2DCharacterTile = self.characterLayer2D.atPoint(charMove2DPoint)
-                print("Found Tile on 2D character layer: " + move2DCharacterTile.debugDescription)
-                let characterTile = move2DCharacterTile as? Character
-                if (characterTile != nil) {
-                    print("There is character on tile")
-                    continue
-                }
-                
-
-                print("\n")
-                print("\n")
-                print("\n")
-
-                // 2D
-                var highlightTile = Ground.init(type: TileType.Ground, action: TileAction.Idle, imagePrefix: nil)
-                highlightTile.position = move2DPoint
-                highlightTile.anchorPoint = CGPoint(x: 0, y: 0)
-
-                highlightTile.color = SKColor(red: 1.0, green: 0, blue: 0, alpha: 0.25)
-                highlightTile.colorBlendFactor = 1.0
-
-                self.highlightPathLayer2D.addChild(highlightTile)
-
-                // 25D
-                highlightTile = Ground.init(type: TileType.Ground, action: TileAction.Idle, imagePrefix: "iso_")
-                highlightTile.position = point2DTo25D(p: move2DPoint)
-                highlightTile.anchorPoint = CGPoint(x: 0, y: 0)
-
-                highlightTile.color = SKColor(red: 1.0, green: 0, blue: 0, alpha: 0.25)
-                highlightTile.colorBlendFactor = 1.0
-
-                self.highlightPathLayer25D.addChild(highlightTile)
-            }
+            self.highlightCharacterAllowMoves(moveTileIndexList: moves!)
         } else if selectedIsoTile is Ground  && self.selectedCharacter25D !== nil { // персонаж выбран и выбрана земля для хода
             let tileLocation = self.tileService.calculateTileLocationOnLayer(tileName: selectedIsoTile!.name!, layer: groundLayer2D)
-            do {
-                try self.tileService.moveTile(tile25D: self.selectedCharacter25D!, tile2D: self.selectedCharacter2D!, location: tileLocation)
-            } catch FIWError.MoveTileError {
-                print("Selected character " + self.characterLayer25D.debugDescription + " can't move")
-            } catch {
-                print("Selected character " + self.characterLayer25D.debugDescription + " can't move")
+            self.move(tile25D: self.selectedCharacter25D!, tile2D: self.selectedCharacter2D!, location: tileLocation)
+        }
+    }
+    
+    func move(tile25D: Character, tile2D: Character, location: TileLocation) {
+        // вычисляем положение тайла относительно движения (куда смотрит)
+        if tile25D.direction != nil {
+            let deltaY = location.point2D.y - tile2D.position.y
+            let deltaX = location.point2D.x - tile2D.position.x
+            let degrees = atan2(deltaX, deltaY) * (180.0 / CGFloat(Double.pi))
+            let moveDirection = self.tileService.compassDirection(degrees: degrees)
+            tile25D.changeDirection(direction: moveDirection)
+            tile2D.changeDirection(direction: moveDirection)
+        }
+        
+        let action25D = SKAction.move(to: location.point25D, duration: 1)
+        tile25D.run(action25D)
+        let action2D = SKAction.move(to: location.point2D, duration: 1)
+        tile2D.run(action2D) {
+            let moves = tile2D.getPossibleMoveTileIndexList()
+            self.highlightCharacterAllowMoves(moveTileIndexList: moves)
+        }
+    }
+    
+    func highlightCharacterAllowMoves(moveTileIndexList: [CGPoint]) {
+        // clean highlights
+        self.highlightPathLayer25D.removeAllChildren()
+        self.highlightPathLayer2D.removeAllChildren()
+        
+        for var moveTI in moveTileIndexList {
+            let move2DPoint = pointTileIndexToPoint2D(point: moveTI, tileSize: GameLogic.tileSize)
+            var isChar = false
+            for char in self.characterLayer2D.children {
+                if char.position == move2DPoint {
+                    isChar = true
+                }
+            }
+            if !isChar {
+                print("Visualize point: " + move2DPoint.debugDescription)
+                visualizePath(move2DPoint: move2DPoint)
             }
         }
+    }
+    
+    func visualizePath(move2DPoint: CGPoint, test: Bool? = false) {
+        // 2D
+        var highlightTile = Ground.init(type: TileType.Ground, action: TileAction.Idle, imagePrefix: nil)
+        highlightTile.position = move2DPoint
+        highlightTile.anchorPoint = CGPoint(x: 0, y: 0)
+        
+        if test! {
+            highlightTile.color = SKColor(red: 0, green: 0, blue: 1.0, alpha: 0.25)
+        } else {
+            highlightTile.color = SKColor(red: 1.0, green: 0, blue: 0, alpha: 0.25)
+        }
+        highlightTile.colorBlendFactor = 1.0
+        
+        self.highlightPathLayer2D.addChild(highlightTile)
+        
+        // 25D
+        highlightTile = Ground.init(type: TileType.Ground, action: TileAction.Idle, imagePrefix: "iso_")
+        highlightTile.position = point2DTo25D(p: move2DPoint)
+        highlightTile.anchorPoint = CGPoint(x: 0, y: 0)
+        
+        if test! {
+            highlightTile.color = SKColor(red: 0, green: 0, blue: 1.0, alpha: 0.25)
+        } else {
+            highlightTile.color = SKColor(red: 1.0, green: 0, blue: 0, alpha: 0.25)
+        }
+        highlightTile.colorBlendFactor = 1.0
+        
+        self.highlightPathLayer25D.addChild(highlightTile)
     }
         
     func getTouchedTile(touch: UITouch) -> Tile? {
@@ -222,8 +220,8 @@ class GameScene: SKScene {
         // get touch location
         let touchLocation = touch.location(in: layer)
         var touchPos2D = point25DTo2D(p: touchLocation)
-        touchPos2D = touchPos2D + CGPoint(x: self.tileSize.width / 2, y: -self.tileSize.height / 2)
-        let touchPosIso = point2DToPointTileIndex(point: touchPos2D, tileSize: self.tileSize)
+        touchPos2D = touchPos2D + CGPoint(x: GameLogic.tileSize.width / 2, y: -GameLogic.tileSize.height / 2)
+        let touchPosIso = point2DToPointTileIndex(point: touchPos2D, tileSize: GameLogic.tileSize)
         
         return touchPosIso
     }
