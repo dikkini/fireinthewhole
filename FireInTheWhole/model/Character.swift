@@ -18,7 +18,7 @@ class Character: Tile {
         fatalError("init(coder:) has not been implemented")
     }
 
-    private let moveStep: Int = 1
+    private let moveStep: Int = 2
 
     func getPossibleMoveTileIndexList(tileSize: (width: Int, height: Int), mapCols: Int, mapRows: Int) -> [CGPoint] {
         var possibleMoveList: [CGPoint] = []
@@ -27,42 +27,44 @@ class Character: Tile {
         let tileTI = point2DToPointTileIndex(point: position, tileSize: tileSize)
 
         var point: CGPoint = CGPoint(x: tileTI.x, y: tileTI.y)
-
-        for var i in 1...self.moveStep {
-            let step = CGFloat(i)
+        for var i in -self.moveStep...self.moveStep {
+//            let step = CGFloat(i)
             // part 1
-
+            for var k in -self.moveStep...self.moveStep{
+                point = CGPoint(x: tileTI.x + CGFloat(i), y: tileTI.y + CGFloat(k))
+                possibleMoveList.append(point)
+            }
             // x+, y+
-            point = CGPoint(x: tileTI.x + step, y: tileTI.y + step)
-            possibleMoveList.append(point)
-
-            // x+, y
-            point = CGPoint(x: tileTI.x + step, y: tileTI.y)
-            possibleMoveList.append(point)
-
-            // x, y+
-            point = CGPoint(x: tileTI.x, y: tileTI.y + step)
-            possibleMoveList.append(point)
-
-            // x-, y-
-            point = CGPoint(x: tileTI.x - step, y: tileTI.y - step)
-            possibleMoveList.append(point)
-
-            // x-, y
-            point = CGPoint(x: tileTI.x - step, y: tileTI.y)
-            possibleMoveList.append(point)
-
-            // x, y-
-            point = CGPoint(x: tileTI.x, y: tileTI.y - step)
-            possibleMoveList.append(point)
-            
-            // x+, y-
-            point = CGPoint(x: tileTI.x + step, y: tileTI.y - step)
-            possibleMoveList.append(point)
-            
-            // x-, y+
-            point = CGPoint(x: tileTI.x - step, y: tileTI.y + step)
-            possibleMoveList.append(point)
+//            point = CGPoint(x: tileTI.x + step, y: tileTI.y + step)
+//            possibleMoveList.append(point)
+//
+//            // x+, y
+//            point = CGPoint(x: tileTI.x + step, y: tileTI.y)
+//            possibleMoveList.append(point)
+//
+//            // x, y+
+//            point = CGPoint(x: tileTI.x, y: tileTI.y + step)
+//            possibleMoveList.append(point)
+//
+//            // x-, y-
+//            point = CGPoint(x: tileTI.x - step, y: tileTI.y - step)
+//            possibleMoveList.append(point)
+//
+//            // x-, y
+//            point = CGPoint(x: tileTI.x - step, y: tileTI.y)
+//            possibleMoveList.append(point)
+//
+//            // x, y-
+//            point = CGPoint(x: tileTI.x, y: tileTI.y - step)
+//            possibleMoveList.append(point)
+//
+//            // x+, y-
+//            point = CGPoint(x: tileTI.x + step, y: tileTI.y - step)
+//            possibleMoveList.append(point)
+//
+//            // x-, y+
+//            point = CGPoint(x: tileTI.x - step, y: tileTI.y + step)
+//            possibleMoveList.append(point)
         }
 
         // TODO убрать мувы за пределы карты с учетом инвертированной осью Y
