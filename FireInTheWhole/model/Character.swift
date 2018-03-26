@@ -20,33 +20,11 @@ class Character: Tile {
     
     private let moveStep: CGFloat = 1
     
-    /// Move tile to location
-    ///
-    /// - Parameter location: 2D CGPoint of Tile
-    /// - Throws: MoveTileError if tile can't move
-//    func move(location: CGPoint) throws {
-//        if self.canMove == false {
-//            throw FIWError.MoveTileError("Tile " + self.debugDescription + " can't move")
-//        }
-//        // вычисляем положение тайла относительно движения (куда смотрит)
-//        if self.direction != nil {
-//            let deltaY = location.y - self.position2D.y
-//            let deltaX = location.x - self.position2D.x
-//            let degrees = atan2(deltaX, deltaY) * (180.0 / CGFloat(Double.pi))
-//            self.compassDirection(degrees: degrees)
-//        }
-//        
-//        print("Move tile " + self.debugDescription + " to " + location.debugDescription)
-//        let action25D = SKAction.move(to: point2DTo25D(p: location), duration: 1)
-//        self.run(action25D)
-//        self.position2D = location
-//    }
-//    
-    func getPossibleMoveTileIndexList() -> [CGPoint] {
+    func getPossibleMoveTileIndexList(tileSize: (width: Int, height: Int), mapCols: Int, mapRows: Int) -> [CGPoint] {
         var possibleMoveList: [CGPoint] = []
         
-        var position = self.position
-        var tileTI = point2DToPointTileIndex(point: position, tileSize: GameLogic.tileSize)
+        let position = self.position
+        let tileTI = point2DToPointTileIndex(point: position, tileSize: tileSize)
         
         var point: CGPoint = CGPoint(x: tileTI.x, y: tileTI.y)
         
@@ -88,9 +66,21 @@ class Character: Tile {
             let index = possibleMoveList.index(of: move)
             if move.y > 0 {
                 possibleMoveList.remove(at: index!)
-            } else if Int(move.y) <= -(GameLogic.mapCols) {
+            } else if Int(move.y) <= -(mapCols) {
+                possibleMoveList.remove(at: index!)
+            } else if (move.x < 0) {
+                possibleMoveList.remove(at: index!)
+            } else if (Int(move.x) >= mapRows) {
                 possibleMoveList.remove(at: index!)
             }
+        }
+        
+        print("Character can MOVE to: ")
+        for move in possibleMoveList {
+            print("2D point: " + pointTileIndexToPoint2D(point: move, tileSize: tileSize).debugDescription)
+            print("25D point: " + point25DTo2D(p: pointTileIndexToPoint2D(point: move, tileSize: tileSize)).debugDescription)
+            print("Tile Index: " + move.debugDescription)
+            print("------------------------------------------")
         }
         
         return possibleMoveList

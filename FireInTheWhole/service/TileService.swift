@@ -14,8 +14,8 @@ class TileService {
 
     }
 
-    func calculateTileLocationOnLayer(tileName: String, layer: SKNode) -> TileLocation {
-        let tile2D = layer.childNode(withName: tileName)
+    func calculateTileLocationOnLayer(tileIsoName: String, layer2D: SKNode) -> TileLocation {
+        let tile2D = layer2D.childNode(withName: tileIsoName)
         let tilePoint2D = tile2D!.position
         let tilePoint25D = point2DTo25D(p: tilePoint2D)
         let tileLocation = TileLocation(point2D: tilePoint2D, pointIso: tilePoint25D)

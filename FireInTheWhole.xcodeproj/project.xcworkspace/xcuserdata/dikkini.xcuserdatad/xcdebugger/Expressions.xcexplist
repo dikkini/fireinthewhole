@@ -11,6 +11,20 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "GameScene.preciseGetTouchedTile(touch:):GameScene.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.atPoint(touchLocation).inParentHierarchy(self.view25D)">
+            </PersistentString>
+            <PersistentString
+               value = "t.name">
+            </PersistentString>
+            <PersistentString
+               value = "touchedNode.name">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "Character.move(location:):Character.swift">
          <PersistentStrings>
             <PersistentString
@@ -50,10 +64,13 @@
          contextName = "GameScene.touchesEnded(_:with:):GameScene.swift">
          <PersistentStrings>
             <PersistentString
-               value = "selectedGround2D.position">
+               value = "self.selectedCharacter2D">
             </PersistentString>
             <PersistentString
-               value = "hlt.position">
+               value = "groundTile.name">
+            </PersistentString>
+            <PersistentString
+               value = "selectedIsoTile.name">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

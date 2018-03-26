@@ -49,7 +49,7 @@ class Tile: SKSpriteNode {
         if self.direction != nil {
             image += "_" + self.direction!.name
         }
-        image += ".png"
+        image += "@2x.png"
         return SKTexture(imageNamed: image)
     }
     
