@@ -88,7 +88,7 @@ class GameScene: SKScene {
         self.view2D.addChild(self.highlightPathLayer2D)
         self.addChild(self.view2D)
 
-        self.view25D.position = CGPoint(x: self.size.width * -0.1, y: self.size.height * 0.1)
+        self.view25D.position = CGPoint(x: self.size.width * -0.05, y: self.size.height * 0.33)
         self.view25D.xScale = deviceScale
         self.view25D.yScale = deviceScale
 

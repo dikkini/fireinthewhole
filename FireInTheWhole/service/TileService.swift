@@ -73,7 +73,7 @@ class TileService {
 
                 if (i == 2 && j == 1) || (i == 4 && j == 3) {
                     let charName = NSUUID().uuidString
-                    let char2d = Character.init(type: TileType.Character, action: TileAction.Idle, direction: TileDirection.E, imagePrefix: nil, canMove: true)
+                    let char2d = Character.init(type: TileType.Character, action: TileAction.Idle, direction: TileDirection.N, imagePrefix: nil, canMove: true)
                     char2d.name = charName
                     char2d.position = CGPoint(x: (j * GameLogic.tileSize.width), y: -(i * GameLogic.tileSize.height))
                     char2d.anchorPoint = CGPoint(x: 0, y: 0)

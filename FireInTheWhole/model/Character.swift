@@ -9,58 +9,62 @@ import Foundation
 import SpriteKit
 
 class Character: Tile {
-    
+
     init(type: TileType, action: TileAction, direction: TileDirection, imagePrefix: String? = nil, canMove: Bool? = false) {
         super.init(type: type, action: action, direction: direction, imagePrefix: imagePrefix, canMove: canMove)
     }
-    
+
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-    private let moveStep: CGFloat = 1
-    
+
+    private let moveStep: Int = 1
+
     func getPossibleMoveTileIndexList(tileSize: (width: Int, height: Int), mapCols: Int, mapRows: Int) -> [CGPoint] {
         var possibleMoveList: [CGPoint] = []
-        
+
         let position = self.position
         let tileTI = point2DToPointTileIndex(point: position, tileSize: tileSize)
-        
-        var point: CGPoint = CGPoint(x: tileTI.x, y: tileTI.y)
-        
-        // x + 1, y + 1
-        point = CGPoint(x: tileTI.x + self.moveStep, y: tileTI.y + self.moveStep)
-        possibleMoveList.append(point)
-        
-        // x, y + 1
-        point = CGPoint(x: tileTI.x, y: tileTI.y + self.moveStep)
-        possibleMoveList.append(point)
-        
-        // x + 1 , y
-        point = CGPoint(x: tileTI.x + self.moveStep, y: tileTI.y)
-        possibleMoveList.append(point)
-        
-        // x - 1, y - 1
-        point = CGPoint(x: tileTI.x - self.moveStep, y: tileTI.y - self.moveStep)
-        possibleMoveList.append(point)
-        
-        // x, y - 1
-        point = CGPoint(x: tileTI.x, y: tileTI.y - self.moveStep)
-        possibleMoveList.append(point)
-        
-        // x - 1, y
-        point = CGPoint(x: tileTI.x - self.moveStep, y: tileTI.y)
-        possibleMoveList.append(point)
-        
-        // x - 1, y + 1
-        point = CGPoint(x: tileTI.x - self.moveStep, y: tileTI.y + self.moveStep)
-        possibleMoveList.append(point)
-        
-        // x + 1, y - 1
-        point = CGPoint(x: tileTI.x + self.moveStep, y: tileTI.y - self.moveStep)
-        possibleMoveList.append(point)
 
-        
+        var point: CGPoint = CGPoint(x: tileTI.x, y: tileTI.y)
+
+        for var i in 1...self.moveStep {
+            let step = CGFloat(i)
+            // part 1
+
+            // x+, y+
+            point = CGPoint(x: tileTI.x + step, y: tileTI.y + step)
+            possibleMoveList.append(point)
+
+            // x+, y
+            point = CGPoint(x: tileTI.x + step, y: tileTI.y)
+            possibleMoveList.append(point)
+
+            // x, y+
+            point = CGPoint(x: tileTI.x, y: tileTI.y + step)
+            possibleMoveList.append(point)
+
+            // x-, y-
+            point = CGPoint(x: tileTI.x - step, y: tileTI.y - step)
+            possibleMoveList.append(point)
+
+            // x-, y
+            point = CGPoint(x: tileTI.x - step, y: tileTI.y)
+            possibleMoveList.append(point)
+
+            // x, y-
+            point = CGPoint(x: tileTI.x, y: tileTI.y - step)
+            possibleMoveList.append(point)
+            
+            // x+, y-
+            point = CGPoint(x: tileTI.x + step, y: tileTI.y - step)
+            possibleMoveList.append(point)
+            
+            // x-, y+
+            point = CGPoint(x: tileTI.x - step, y: tileTI.y + step)
+            possibleMoveList.append(point)
+        }
+
         // TODO убрать мувы за пределы карты с учетом инвертированной осью Y
         for move in possibleMoveList {
             let index = possibleMoveList.index(of: move)
@@ -74,7 +78,7 @@ class Character: Tile {
                 possibleMoveList.remove(at: index!)
             }
         }
-        
+
         print("Character can MOVE to: ")
         for move in possibleMoveList {
             print("2D point: " + pointTileIndexToPoint2D(point: move, tileSize: tileSize).debugDescription)
@@ -82,7 +86,7 @@ class Character: Tile {
             print("Tile Index: " + move.debugDescription)
             print("------------------------------------------")
         }
-        
+
         return possibleMoveList
     }
 }
