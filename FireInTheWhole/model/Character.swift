@@ -27,44 +27,11 @@ class Character: Tile {
         let tileTI = point2DToPointTileIndex(point: position, tileSize: tileSize)
 
         var point: CGPoint = CGPoint(x: tileTI.x, y: tileTI.y)
-        for var i in -self.moveStep...self.moveStep {
-//            let step = CGFloat(i)
-            // part 1
-            for var k in -self.moveStep...self.moveStep{
+        for i in -self.moveStep...self.moveStep {
+            for k in -self.moveStep...self.moveStep{
                 point = CGPoint(x: tileTI.x + CGFloat(i), y: tileTI.y + CGFloat(k))
                 possibleMoveList.append(point)
             }
-            // x+, y+
-//            point = CGPoint(x: tileTI.x + step, y: tileTI.y + step)
-//            possibleMoveList.append(point)
-//
-//            // x+, y
-//            point = CGPoint(x: tileTI.x + step, y: tileTI.y)
-//            possibleMoveList.append(point)
-//
-//            // x, y+
-//            point = CGPoint(x: tileTI.x, y: tileTI.y + step)
-//            possibleMoveList.append(point)
-//
-//            // x-, y-
-//            point = CGPoint(x: tileTI.x - step, y: tileTI.y - step)
-//            possibleMoveList.append(point)
-//
-//            // x-, y
-//            point = CGPoint(x: tileTI.x - step, y: tileTI.y)
-//            possibleMoveList.append(point)
-//
-//            // x, y-
-//            point = CGPoint(x: tileTI.x, y: tileTI.y - step)
-//            possibleMoveList.append(point)
-//
-//            // x+, y-
-//            point = CGPoint(x: tileTI.x + step, y: tileTI.y - step)
-//            possibleMoveList.append(point)
-//
-//            // x-, y+
-//            point = CGPoint(x: tileTI.x - step, y: tileTI.y + step)
-//            possibleMoveList.append(point)
         }
 
         // TODO убрать мувы за пределы карты с учетом инвертированной осью Y
