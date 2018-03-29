@@ -37,7 +37,7 @@ class GameScene: SKScene {
         }
 
         let selectedIsoTile = self.tileService.getTouchedTile(touch: touch)
-        if selectedIsoTile is Character {
+        if selectedIsoTile is Character && self.selectedCharacter25D == nil{
             self.selectedCharacter25D = selectedIsoTile as? Character
             // ищем character на 2D плоскости
             let charName = self.selectedCharacter25D!.name!
@@ -46,11 +46,23 @@ class GameScene: SKScene {
             let moves = self.selectedCharacter2D?.getPossibleMoveTileIndexList(tileSize: GameLogic.tileSize, mapCols: GameLogic.mapCols, mapRows: GameLogic.mapRows)
 
             self.tileService.highlightCharacterAllowMoves(moveTileIndexList: moves!)
+        } else if selectedIsoTile is Character && self.selectedCharacter25D !== nil {
+            print("FIRE!!!!!!")
+            print(self.selectedCharacter25D?.name)
+            print(selectedIsoTile?.name)
+            
+            let targetTile = (selectedIsoTile as? Character)!
+           // let targetTileLocation = self.tileService.calculateTileLocation(tile25DName: targetTile.name!)
+            
         } else if selectedIsoTile is Ground && self.selectedCharacter25D !== nil { // персонаж выбран и выбрана земля для хода
             let groundTile = (selectedIsoTile as? Ground)!
         
             let tileLocation = self.tileService.calculateTileLocation(tile25DName: groundTile.name!)
-            self.tileService.move(tile25D: self.selectedCharacter25D!, tile2D: self.selectedCharacter2D!, location: tileLocation)
+            let canMove: Bool = self.tileService.move(tile25D: self.selectedCharacter25D!, tile2D: self.selectedCharacter2D!, location: tileLocation)
+            if (!canMove) {
+                self.selectedCharacter25D = nil
+            }
+            
         }
     }
 

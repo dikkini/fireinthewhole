@@ -183,7 +183,7 @@ class TileService {
         return d
     }
     
-    func move(tile25D: Character, tile2D: Character, location: TileLocation) {
+    func move(tile25D: Character, tile2D: Character, location: TileLocation) -> Bool {
         var moves = tile2D.getPossibleMoveTileIndexList(tileSize: GameLogic.tileSize, mapCols: GameLogic.mapCols, mapRows: GameLogic.mapRows)
         
         var canMove = false
@@ -199,7 +199,9 @@ class TileService {
             print("2D point: " + location.point2D.debugDescription)
             print("25D point: " + location.point25D.debugDescription)
             print("Tile Index: " + point2DToPointTileIndex(point: location.point2D, tileSize: GameLogic.tileSize).debugDescription)
-            return
+            self.highlightPathLayer25D.removeAllChildren()
+            self.highlightPathLayer2D.removeAllChildren()
+            return false
         }
         
         // вычисляем положение тайла относительно движения (куда смотрит)
@@ -219,6 +221,7 @@ class TileService {
             moves = tile2D.getPossibleMoveTileIndexList(tileSize: GameLogic.tileSize, mapCols: GameLogic.mapCols, mapRows: GameLogic.mapRows)
             self.highlightCharacterAllowMoves(moveTileIndexList: moves)
         }
+        return true
     }
     
     func highlightCharacterAllowMoves(moveTileIndexList: [CGPoint]) {

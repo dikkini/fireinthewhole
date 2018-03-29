@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3E5F9E5B206C4E1600D6D843 /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E5F9E5A206C4E1600D6D843 /* File.swift */; };
 		B73EC237205A877700879A48 /* Wall.swift in Sources */ = {isa = PBXBuildFile; fileRef = B73EC236205A877700879A48 /* Wall.swift */; };
 		B73EC239205AA47A00879A48 /* Ground.swift in Sources */ = {isa = PBXBuildFile; fileRef = B73EC238205AA47A00879A48 /* Ground.swift */; };
 		B73EC23B205AA48500879A48 /* Character.swift in Sources */ = {isa = PBXBuildFile; fileRef = B73EC23A205AA48500879A48 /* Character.swift */; };
@@ -48,6 +49,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3E5F9E5A206C4E1600D6D843 /* File.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
 		B73EC236205A877700879A48 /* Wall.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Wall.swift; sourceTree = "<group>"; };
 		B73EC238205AA47A00879A48 /* Ground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ground.swift; sourceTree = "<group>"; };
 		B73EC23A205AA48500879A48 /* Character.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Character.swift; sourceTree = "<group>"; };
@@ -179,6 +181,7 @@
 				B7AA39E2205A745700ABE655 /* TileEnum.swift */,
 				B7F381FD205EF4A300F7AB48 /* Point.swift */,
 				B76CF56E205FF81100C3FDA6 /* FIWError.swift */,
+				3E5F9E5A206C4E1600D6D843 /* File.swift */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -329,6 +332,7 @@
 				B7B147632059B9E1000D0877 /* GameViewController.swift in Sources */,
 				B73EC23F205BC46C00879A48 /* Global.swift in Sources */,
 				B7F381FC205E346400F7AB48 /* LayersMap.swift in Sources */,
+				3E5F9E5B206C4E1600D6D843 /* File.swift in Sources */,
 				B73EC241205C070D00879A48 /* GameLogic.swift in Sources */,
 				B7B1475B2059B9E1000D0877 /* AppDelegate.swift in Sources */,
 				B76CF56F205FF81100C3FDA6 /* FIWError.swift in Sources */,
