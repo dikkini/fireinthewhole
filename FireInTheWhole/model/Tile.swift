@@ -14,18 +14,34 @@ class Tile: SKSpriteNode {
     internal var direction: TileDirection?
     internal var imagePrefix: String?
     internal var canMove: Bool?
+    internal var position2D: CGPoint
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    init(type: TileType, action: TileAction = TileAction.Idle, direction: TileDirection? = nil, imagePrefix: String? = nil, canMove: Bool? = false) {
+    init(type: TileType, action: TileAction = TileAction.Idle, position2D: CGPoint, direction: TileDirection? = nil, imagePrefix: String? = nil, canMove: Bool? = false) {
         self.type = type
         self.direction = direction
         self.action = action
+        self.position2D = position2D
         self.imagePrefix = imagePrefix
         self.canMove = canMove
-        super.init(texture: self.getTileTexture(), color: .clear, size: self.getTileTexture().size())
+        
+        var image: String
+        if self.imagePrefix != nil {
+            image = self.imagePrefix! + self.type.name
+        } else {
+            image = self.type.name
+        }
+        
+        if self.direction != nil {
+            image += "_" + self.direction!.name
+        }
+        image += "@2x.png"
+        var texture = SKTexture(imageNamed: image)
+        
+        super.init(texture: texture, color: .clear, size: texture.size())
     }
     
     func changeDirection(direction: TileDirection) {

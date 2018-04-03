@@ -3,10 +3,10 @@
    version = "1.0">
    <ContextStates>
       <ContextState
-         contextName = "GameScene.traversableTiles():GameScene.swift">
+         contextName = "Character.move(point25D:):Character.swift">
          <PersistentStrings>
             <PersistentString
-               value = "tTiles">
+               value = "point2DToPointTileIndex(point: point25DTo2D(p: point25D), tileSize: GameLogic.tileSize)">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -21,6 +21,14 @@
             </PersistentString>
             <PersistentString
                value = "touchedNode.name">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "GameScene.traversableTiles():GameScene.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "tTiles">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -67,10 +75,10 @@
                value = "self.selectedCharacter2D">
             </PersistentString>
             <PersistentString
-               value = "groundTile.name">
+               value = "selectedIsoTile.name">
             </PersistentString>
             <PersistentString
-               value = "selectedIsoTile.name">
+               value = "groundTile.name">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

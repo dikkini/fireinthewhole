@@ -18,7 +18,7 @@ class GameScene: SKScene {
     var tileService: TileService
 
     override init(size: CGSize) {
-        self.tileService = TileService(tileSize: (width: 32, height: 32), mapRows: 10, mapCols: 10)
+        self.tileService = TileService(tileSize: (width: 32, height: 32), mapRows: 4, mapCols: 4)
         
         super.init(size: size)
         self.anchorPoint = CGPoint(x: 0.5, y: 0.5)
@@ -29,40 +29,29 @@ class GameScene: SKScene {
     }
 
     var selectedCharacter25D: Character? = nil
-    var selectedCharacter2D: Character? = nil
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         // Choose one of the touches to work with
         guard let touch = touches.first else {
             return
         }
 
-        let selectedIsoTile = self.tileService.getTouchedTile(touch: touch)
-        if selectedIsoTile is Character && self.selectedCharacter25D == nil{
-            self.selectedCharacter25D = selectedIsoTile as? Character
-            // ищем character на 2D плоскости
-            let charName = self.selectedCharacter25D!.name!
-            self.selectedCharacter2D = self.tileService.findCharacter2DTileByName(name: charName) as? Character
-
-            let moves = self.selectedCharacter2D?.getPossibleMoveTileIndexList(tileSize: GameLogic.tileSize, mapCols: GameLogic.mapCols, mapRows: GameLogic.mapRows)
+        let selectedTile = self.tileService.getTouchedTile(touch: touch)
+        if selectedTile is Character && (self.selectedCharacter25D == nil || selectedTile != self.selectedCharacter25D) {
+            self.selectedCharacter25D = selectedTile as? Character
+            let moves = self.selectedCharacter25D?.getPossibleMoveTileIndexList(tileSize: GameLogic.tileSize, mapCols: GameLogic.mapCols, mapRows: GameLogic.mapRows)
 
             self.tileService.highlightCharacterAllowMoves(moveTileIndexList: moves!)
-        } else if selectedIsoTile is Character && self.selectedCharacter25D !== nil {
+        } else if selectedTile is Character && self.selectedCharacter25D !== nil {
             print("FIRE!!!!!!")
             print(self.selectedCharacter25D?.name)
-            print(selectedIsoTile?.name)
+            print(selectedTile?.name)
             
-            let targetTile = (selectedIsoTile as? Character)!
-           // let targetTileLocation = self.tileService.calculateTileLocation(tile25DName: targetTile.name!)
-            
-        } else if selectedIsoTile is Ground && self.selectedCharacter25D !== nil { // персонаж выбран и выбрана земля для хода
-            let groundTile = (selectedIsoTile as? Ground)!
+            let targetTile = (selectedTile as? Character)!
         
-            let tileLocation = self.tileService.calculateTileLocation(tile25DName: groundTile.name!)
-            let canMove: Bool = self.tileService.move(tile25D: self.selectedCharacter25D!, tile2D: self.selectedCharacter2D!, location: tileLocation)
-            if (!canMove) {
-                self.selectedCharacter25D = nil
-            }
+        } else if selectedTile is Ground && self.selectedCharacter25D !== nil { // персонаж выбран и выбрана земля для хода
+            let groundTile = (selectedTile as? Ground)!
             
+            self.selectedCharacter25D?.move(point25D: groundTile.position)
         }
     }
 
