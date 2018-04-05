@@ -18,7 +18,7 @@ class GameScene: SKScene {
     var tileService: TileService
 
     override init(size: CGSize) {
-        self.tileService = TileService(tileSize: (width: 32, height: 32), mapRows: 4, mapCols: 4)
+        self.tileService = TileService(tileSize: (width: 30, height: 32), mapRows: 4, mapCols: 4)
         
         super.init(size: size)
         self.anchorPoint = CGPoint(x: 0.5, y: 0.5)
@@ -52,6 +52,8 @@ class GameScene: SKScene {
             let groundTile = (selectedTile as? Ground)!
             
             self.selectedCharacter25D?.move(point25D: groundTile.position)
+            self.tileService.highlightPathLayer25D.removeAllChildren()
+            self.selectedCharacter25D = nil
         }
     }
 

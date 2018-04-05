@@ -126,7 +126,7 @@ class TileService {
         
         self.view25D.position = CGPoint(x: scene.size.width * -0.05, y: scene.size.height * 0.33)
         self.view25D.xScale = deviceScale
-        self.view25D.yScale = deviceScale
+        self.view25D.yScale = deviceScale + 0.5
         
         self.view25D.addChild(self.groundLayer25D)
         self.view25D.addChild(self.objectLayer25D)
