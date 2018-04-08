@@ -178,9 +178,9 @@
 				B73EC23A205AA48500879A48 /* Character.swift */,
 				B73EC23E205BC46C00879A48 /* Global.swift */,
 				B73EC240205C070D00879A48 /* GameLogic.swift */,
+				B76CF56E205FF81100C3FDA6 /* FIWError.swift */,
 				B7AA39E2205A745700ABE655 /* TileEnum.swift */,
 				B7F381FD205EF4A300F7AB48 /* Point.swift */,
-				B76CF56E205FF81100C3FDA6 /* FIWError.swift */,
 				3E5F9E5A206C4E1600D6D843 /* Fire.swift */,
 			);
 			path = model;

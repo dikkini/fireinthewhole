@@ -3,6 +3,14 @@
    version = "1.0">
    <ContextStates>
       <ContextState
+         contextName = "TileService.containsCustom(node:p:):TileService.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "node.position">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "Character.move(point25D:):Character.swift">
          <PersistentStrings>
             <PersistentString
@@ -10,6 +18,17 @@
             </PersistentString>
             <PersistentString
                value = "point25D.x">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "TileService.generateMap():TileService.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.tileSize.height">
+            </PersistentString>
+            <PersistentString
+               value = "self.tileSize.width">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

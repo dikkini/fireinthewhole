@@ -11,7 +11,7 @@ import SpriteKit
 import GameplayKit
 
 class GameLogic {
-    static let mapCols = 4
-    static let mapRows = 4
-    static let tileSize = (width: 30, height: 32)
+    static let mapCols = 10
+    static let mapRows = 10
+    static let tileSize = (width: 32, height: 32)
 }

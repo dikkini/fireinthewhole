@@ -18,7 +18,7 @@ class Character: Tile {
         fatalError("init(coder:) has not been implemented")
     }
 
-    private let moveStep: Int = 1
+    private let moveStep: Int = 2
 
     func move(point25D: CGPoint) -> Bool {
         var moves = self.getPossibleMoveTileIndexList(tileSize: GameLogic.tileSize, mapCols: GameLogic.mapCols, mapRows: GameLogic.mapRows)

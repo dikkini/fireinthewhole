@@ -9,8 +9,9 @@ import Foundation
 import SpriteKit
 
 class Ground: Tile {
-    
     override init(type: TileType, action: TileAction, position2D: CGPoint, direction: TileDirection? = nil, imagePrefix: String? = nil, canMove: Bool? = false) {
+        
+
         super.init(type: type, action: action, position2D: position2D, direction: direction, imagePrefix: imagePrefix, canMove: canMove)
     }
     
