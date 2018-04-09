@@ -21,18 +21,8 @@ class Character: Tile {
     private let moveStep: Int = 2
 
     func move(point25D: CGPoint) -> Bool {
-        var moves = self.getPossibleMoveTileIndexList(tileSize: GameLogic.tileSize, mapCols: GameLogic.mapCols, mapRows: GameLogic.mapRows)
 
-        let pointTI = point2DToPointTileIndex(point: point25DTo2D(p: point25D), tileSize: GameLogic.tileSize)
-        var canMove = false
-        for move in moves {
-            if pointTI == move {
-                canMove = true
-                break
-            }
-        }
-
-        if !canMove {
+        if !self.canMoveTo(point25D: point25D) {
             print("Character can't move to point")
             print("25D point: " + point25D.debugDescription)
             print("Tile Index: " + point2DToPointTileIndex(point: point25DTo2D(p: point25D), tileSize: GameLogic.tileSize).debugDescription)
@@ -53,6 +43,24 @@ class Character: Tile {
             self.position2D = point25DTo2D(p: self.position)
         }
         return true
+    }
+    
+    func canMoveTo (point25D: CGPoint) -> Bool {
+        var moves = self.getPossibleMoveTileIndexList(tileSize: GameLogic.tileSize, mapCols: GameLogic.mapCols, mapRows: GameLogic.mapRows)
+        
+        let pointTI = point2DToPointTileIndex(point: point25DTo2D(p: point25D), tileSize: GameLogic.tileSize)
+        var canMove = false
+        for move in moves {
+            if pointTI == move {
+                return true
+            }
+        }
+        
+        print("Character can't move to point")
+        print("25D point: " + point25D.debugDescription)
+        print("Tile Index: " + point2DToPointTileIndex(point: point25DTo2D(p: point25D), tileSize: GameLogic.tileSize).debugDescription)
+        return false
+        
     }
 
     func getPossibleMoveTileIndexList(tileSize: (width: Int, height: Int), mapCols: Int, mapRows: Int) -> [CGPoint] {

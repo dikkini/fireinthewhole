@@ -107,7 +107,9 @@ class TileService {
 
         // try get character layer
         for character25D in self.characterLayer25D.children {
-            if character25D.contains(touch.location(in: self.characterLayer25D)) {
+            //if character25D.contains(touch.location(in: self.characterLayer25D))
+            if (containsCustom(node: character25D, p: touch.location(in: self.characterLayer25D)))
+                {
                 touchedTile = (character25D as? Character)!
                 print("Character touched: " + touchedTile!.debugDescription)
                 print("touch: " + touch.location(in: self.characterLayer25D).debugDescription)
@@ -172,6 +174,19 @@ class TileService {
         highlightTile.colorBlendFactor = 1.0
 
         self.highlightPathLayer25D.addChild(highlightTile)
+    }
+
+    func highlightMovePoint(move25DPoint: CGPoint) {
+        var points = [
+            CGPoint(x: -GameLogic.tileSize.width, y: -GameLogic.tileSize.height/2)
+            , CGPoint(x: 0, y: 0)
+            , CGPoint(x: GameLogic.tileSize.width, y: -GameLogic.tileSize.height/2)
+            , CGPoint(x: 0, y: -GameLogic.tileSize.height)
+        ]
+        var highlighMoveNode = SKShapeNode(points: &points, count:points.count)
+        highlighMoveNode.position = move25DPoint
+        highlighMoveNode.fillColor = SKColor.green
+        self.highlightPathLayer25D.addChild(highlighMoveNode)
     }
 
     // сортировка по глубине, чтобы персонажи не оказались "в текстуре"
