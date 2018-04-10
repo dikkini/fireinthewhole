@@ -108,8 +108,7 @@ class TileService {
         // try get character layer
         for character25D in self.characterLayer25D.children {
             //if character25D.contains(touch.location(in: self.characterLayer25D))
-            if (containsCustom(node: character25D, p: touch.location(in: self.characterLayer25D)))
-                {
+            if (containsCustom(node: character25D, p: touch.location(in: self.characterLayer25D))) {
                 touchedTile = (character25D as? Character)!
                 print("Character touched: " + touchedTile!.debugDescription)
                 print("touch: " + touch.location(in: self.characterLayer25D).debugDescription)
@@ -121,8 +120,6 @@ class TileService {
             if (containsCustom(node: ground25D, p: touch.location(in: self.groundLayer25D))) {
                 touchedTile = (ground25D as? Ground)!
                 print("Ground touched: " + touchedTile!.debugDescription)
-                print("2D position of touched ground: " + touchedTile!.position2D.debugDescription)
-                print("TileIndex of touched ground: " + point2DToPointTileIndex(point: touchedTile!.position2D, tileSize: GameLogic.tileSize).debugDescription)
                 print("touch: " + touch.location(in: self.characterLayer25D).debugDescription)
                 return touchedTile
             }

@@ -18,7 +18,7 @@ class GameScene: SKScene {
     var tileService: TileService
 
     override init(size: CGSize) {
-        self.tileService = TileService(tileSize: (width: 32, height: 32), mapRows: 10, mapCols: 10)
+        self.tileService = TileService(tileSize: (width: GameLogic.tileSize.width, height: GameLogic.tileSize.height), mapRows:  GameLogic.mapRows, mapCols: GameLogic.mapRows)
         
         super.init(size: size)
         self.anchorPoint = CGPoint(x: 0.5, y: 0.5)
@@ -37,25 +37,30 @@ class GameScene: SKScene {
         }
 
         let selectedTile = self.tileService.getTouchedTile(touch: touch)
-        if selectedTile is Character && (self.selectedCharacter25D == nil || selectedTile == self.selectedCharacter25D) {
+        if selectedTile is Character && (self.selectedCharacter25D == nil || selectedTile == self.selectedCharacter25D) { // первый раз выбран персонаж
+            print("Character chosen for the first time")
             self.selectedCharacter25D = selectedTile as? Character
             let moves = self.selectedCharacter25D?.getPossibleMoveTileIndexList(tileSize: GameLogic.tileSize, mapCols: GameLogic.mapCols, mapRows: GameLogic.mapRows)
            
             self.tileService.highlightCharacterAllowMoves(moveTileIndexList: moves!)
             self.selectedGround25D = nil
-        } else if selectedTile is Character && self.selectedCharacter25D !== nil {
-            print("FIRE!!!!!!")
+        } else if selectedTile is Character && self.selectedCharacter25D !== nil && selectedTile as? Character !== self.selectedCharacter25D { // выбран другой персонаж, не тот что выбран ранее
+            print("Other character chosen")
             print(self.selectedCharacter25D?.name)
             print(selectedTile?.name)
             
             let targetTile = (selectedTile as? Character)!
+            
+            // TODO определение какой именно character, в зависимости от этого разные действия.
         
         } else if selectedTile is Ground && self.selectedCharacter25D !== nil && self.selectedGround25D == nil { // персонаж выбран и выбрана земля для хода
+            print("Ground chosen first time for selected characeter mean while character was chosen")
             self.selectedGround25D = (selectedTile as? Ground)!
             if (self.selectedCharacter25D?.canMoveTo(point25D: (self.selectedGround25D?.position)!))! { // если персонаж пожет пойти в точку/ то подсветить точку
+                print("Character can move to ground point. Highligh it!")
                 self.tileService.highlightMovePoint(move25DPoint: (self.selectedGround25D?.position)!)
-            }
-            else { //иначе убрать выделение
+            } else { //иначе убрать выделение
+                print("Character can't move to ground point. Remove highlights - reset move action!")
                 self.tileService.highlightPathLayer25D.removeAllChildren()
                 self.selectedGround25D = nil
                 self.selectedCharacter25D = nil
@@ -66,14 +71,12 @@ class GameScene: SKScene {
                 self.tileService.highlightPathLayer25D.removeAllChildren()
                 self.selectedCharacter25D = nil
                 self.selectedGround25D = nil
-            }
-            else {
+            } else {
                 var movePointHighlight = self.tileService.highlightPathLayer25D.children.last
                 if (self.selectedCharacter25D?.canMoveTo(point25D: (selectedTile?.position)!))!{ // иначе либо подсветить другую землю
                     movePointHighlight?.position = (selectedTile?.position)!
                     self.selectedGround25D = selectedTile as! Ground
-                }
-                else { // либо убрать подсветку патенциального хода
+                } else { // либо убрать подсветку патенциального хода
                     self.tileService.highlightPathLayer25D.removeChildren(in: [movePointHighlight!])
                     self.selectedGround25D = nil
                 }

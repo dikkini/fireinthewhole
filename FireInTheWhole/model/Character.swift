@@ -80,28 +80,6 @@ class Character: Tile {
             }
         }
 
-        // TODO убрать мувы за пределы карты с учетом инвертированной осью Y
-//        for move in possibleMoveList {
-//            let index = possibleMoveList.index(of: move)
-//            if move.y > 0 {
-//                possibleMoveList.remove(at: index!)
-//            } else if Int(move.y) <= -(mapCols) {
-//                possibleMoveList.remove(at: index!)
-//            } else if (move.x < 0) {
-//                possibleMoveList.remove(at: index!)
-//            } else if (Int(move.x) >= mapRows) {
-//                possibleMoveList.remove(at: index!)
-//            }
-//        }
-
-        print("Character can MOVE to: ")
-        for move in possibleMoveList {
-            print("2D point: " + pointTileIndexToPoint2D(point: move, tileSize: tileSize).debugDescription)
-            print("25D point: " + point25DTo2D(p: pointTileIndexToPoint2D(point: move, tileSize: tileSize)).debugDescription)
-            print("Tile Index: " + move.debugDescription)
-            print("------------------------------------------")
-        }
-
         return possibleMoveList
     }
 }
