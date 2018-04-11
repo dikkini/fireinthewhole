@@ -220,12 +220,12 @@ class TileService {
     //0, 5
 
     func containsCustom(node: SKNode, p: CGPoint) -> Bool {
-        let top_lines = -abs((1 / 2) * (p.x - node.position.x)) + node.position.y - p.y
-        let bottom_lines = abs((1 / 2) * (p.x - node.position.x)) - 32 + node.position.y - p.y
-//        print("\n!! top:", top_lines, " !!")
-//        print("\n!! bot:", bottom_lines, "!!")
-//        print("\n!! point:", p, "!!")
-//        print("\n!! !!!!!!!!!!!!!\n")
+        // 1/2p.x - a.x
+        let modY = abs((1 / 2) * (p.x - node.position.x))
+        let equalY = node.position.y - p.y
+        
+        let top_lines = -modY + equalY
+        let bottom_lines = modY - CGFloat(GameLogic.tileSize.height) + equalY
         if (top_lines >= 0)
             && (bottom_lines <= 0) {
             return true
