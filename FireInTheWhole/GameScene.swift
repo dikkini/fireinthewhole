@@ -18,8 +18,8 @@ class GameScene: SKScene {
     var tileService: TileService
 
     override init(size: CGSize) {
-        self.tileService = TileService(tileSize: (width: GameLogic.tileSize.width, height: GameLogic.tileSize.height), mapRows:  GameLogic.mapRows, mapCols: GameLogic.mapRows)
-        
+        self.tileService = TileService(tileSize: (width: GameLogic.tileSize.width, height: GameLogic.tileSize.height), mapRows: GameLogic.mapRows, mapCols: GameLogic.mapRows)
+
         super.init(size: size)
         self.anchorPoint = CGPoint(x: 0.5, y: 0.5)
     }
@@ -41,18 +41,18 @@ class GameScene: SKScene {
             print("Character chosen for the first time")
             self.selectedCharacter25D = selectedTile as? Character
             let moves = self.selectedCharacter25D?.getPossibleMoveTileIndexList(tileSize: GameLogic.tileSize, mapCols: GameLogic.mapCols, mapRows: GameLogic.mapRows)
-           
+
             self.tileService.highlightCharacterAllowMoves(moveTileIndexList: moves!)
             self.selectedGround25D = nil
         } else if selectedTile is Character && self.selectedCharacter25D !== nil && selectedTile as? Character !== self.selectedCharacter25D { // выбран другой персонаж, не тот что выбран ранее
             print("Other character chosen")
             print(self.selectedCharacter25D?.name)
             print(selectedTile?.name)
-            
+
             let targetTile = (selectedTile as? Character)!
-            
+
             // TODO определение какой именно character, в зависимости от этого разные действия.
-        
+
         } else if selectedTile is Ground && self.selectedCharacter25D !== nil && self.selectedGround25D == nil { // персонаж выбран и выбрана земля для хода
             print("Ground chosen first time for selected characeter mean while character was chosen")
             self.selectedGround25D = (selectedTile as? Ground)!
@@ -66,16 +66,32 @@ class GameScene: SKScene {
                 self.selectedCharacter25D = nil
             }
         } else if selectedTile is Ground && self.selectedGround25D != nil && self.selectedCharacter25D != nil { //если выбрана земля и до этого была выбрана земля (которая уже подсвечена)
-            if selectedTile?.position == self.selectedGround25D?.position{ // и координаты совпадают? то надо идти в эту точку
-                self.selectedCharacter25D?.move(point25D: (self.selectedGround25D?.position)!)
+            if selectedTile?.position == self.selectedGround25D?.position { // и координаты совпадают? то надо идти в эту точку
+                let toPos2D = point25DTo2D(p: (self.selectedGround25D?.position)!)
+                let fromPos2D = point25DTo2D(p: (self.selectedCharacter25D?.position)!)
+                let path = self.tileService.findPathFrom(from: point2DToPointTileIndex(point: fromPos2D, tileSize: GameLogic.tileSize), to: point2DToPointTileIndex(point: toPos2D, tileSize: GameLogic.tileSize))
+                if path != nil {
+                    // TODO здесь надо удостоверится что персонаж точно сможет пойти
+                    let tileIndexOfChar = point2DToPointTileIndex(point: (self.selectedCharacter25D?.position2D)!, tileSize: GameLogic.tileSize)
+                    self.selectedCharacter25D!.move(path: path!, completion: {newTileIndexOfChar in
+                        let oldIndex = tileIndexOfChar
+                        let newIndex = newTileIndexOfChar
+                        let oldType = TileType.Ground
+                        let newType = TileType.Character
+                        self.tileService.updateTileMap(oldIndex: oldIndex, newIndex: newIndex, oldType: oldType, newType: newType)
+                    })
+                } else {
+                    print("PATH IS NIL")
+                }
+
                 self.tileService.highlightPathLayer25D.removeAllChildren()
                 self.selectedCharacter25D = nil
                 self.selectedGround25D = nil
             } else {
-                var movePointHighlight = self.tileService.highlightPathLayer25D.children.last
-                if (self.selectedCharacter25D?.canMoveTo(point25D: (selectedTile?.position)!))!{ // иначе либо подсветить другую землю
+                let movePointHighlight = self.tileService.highlightPathLayer25D.children.last
+                if (self.selectedCharacter25D?.canMoveTo(point25D: (selectedTile?.position)!))! { // иначе либо подсветить другую землю
                     movePointHighlight?.position = (selectedTile?.position)!
-                    self.selectedGround25D = selectedTile as! Ground
+                    self.selectedGround25D = selectedTile as? Ground
                 } else { // либо убрать подсветку патенциального хода
                     self.tileService.highlightPathLayer25D.removeChildren(in: [movePointHighlight!])
                     self.selectedGround25D = nil

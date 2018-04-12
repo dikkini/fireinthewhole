@@ -3,12 +3,29 @@
    version = "1.0">
    <ContextStates>
       <ContextState
-         contextName = "Character.move(point25D:):Character.swift">
+         contextName = "Character.move(location:):Character.swift">
          <PersistentStrings>
             <PersistentString
-               value = "point2DToPointTileIndex(point: point25DTo2D(p: point25D), tileSize: GameLogic.tileSize)">
+               value = "location.point2D.x - position2D.x">
+            </PersistentString>
+            <PersistentString
+               value = "location.point2D.y - position2D.y">
             </PersistentString>
          </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "Character.getPossibleMoves():Character.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.position">
+            </PersistentString>
+            <PersistentString
+               value = "self.position2D">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "TileService.createMap():TileSerivce.swift">
       </ContextState>
       <ContextState
          contextName = "GameScene.preciseGetTouchedTile(touch:):GameScene.swift">
@@ -25,21 +42,21 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "GameScene.traversableTiles():GameScene.swift">
+         contextName = "GameScene.touchesEnded(_:with:):GameScene.swift">
          <PersistentStrings>
             <PersistentString
-               value = "tTiles">
+               value = "self.tileService.tileMap">
+            </PersistentString>
+            <PersistentString
+               value = "self.tileService.tileMap[-Int(tileIndexOfChar.y)][Int(tileIndexOfChar.x)]">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "Character.move(location:):Character.swift">
+         contextName = "GameScene.traversableTiles():GameScene.swift">
          <PersistentStrings>
             <PersistentString
-               value = "location.point2D.x - position2D.x">
-            </PersistentString>
-            <PersistentString
-               value = "location.point2D.y - position2D.y">
+               value = "tTiles">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -55,30 +72,30 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "TileService.createMap():TileSerivce.swift">
+         contextName = "GameScene.init(size:):GameScene.swift">
       </ContextState>
       <ContextState
-         contextName = "GameScene.getTouchedTile(touch:):GameScene.swift">
+         contextName = "Character.move(point25D:):Character.swift">
          <PersistentStrings>
             <PersistentString
-               value = "touch.location(in: self.groundLayer25D)">
+               value = "point2DToPointTileIndex(point: point25DTo2D(p: point25D), tileSize: GameLogic.tileSize)">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "GameScene.init(size:):GameScene.swift">
-      </ContextState>
-      <ContextState
-         contextName = "GameScene.touchesEnded(_:with:):GameScene.swift">
+         contextName = "TileService.findPathFrom(from:to:):TileService.swift">
          <PersistentStrings>
             <PersistentString
-               value = "self.selectedCharacter2D">
+               value = "to.x">
             </PersistentString>
             <PersistentString
-               value = "selectedIsoTile.name">
+               value = "traversable[Int(-to.y)][Int(to.x)]">
             </PersistentString>
             <PersistentString
-               value = "groundTile.name">
+               value = "to.y">
+            </PersistentString>
+            <PersistentString
+               value = "traversable">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -86,13 +103,10 @@
          contextName = "TileService.placeTile2D(view:tile:position:):TileSerivce.swift">
       </ContextState>
       <ContextState
-         contextName = "Character.getPossibleMoves():Character.swift">
+         contextName = "GameScene.getTouchedTile(touch:):GameScene.swift">
          <PersistentStrings>
             <PersistentString
-               value = "self.position">
-            </PersistentString>
-            <PersistentString
-               value = "self.position2D">
+               value = "touch.location(in: self.groundLayer25D)">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

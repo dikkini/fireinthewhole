@@ -14,6 +14,7 @@
 		B73EC23F205BC46C00879A48 /* Global.swift in Sources */ = {isa = PBXBuildFile; fileRef = B73EC23E205BC46C00879A48 /* Global.swift */; };
 		B73EC241205C070D00879A48 /* GameLogic.swift in Sources */ = {isa = PBXBuildFile; fileRef = B73EC240205C070D00879A48 /* GameLogic.swift */; };
 		B76CF56F205FF81100C3FDA6 /* FIWError.swift in Sources */ = {isa = PBXBuildFile; fileRef = B76CF56E205FF81100C3FDA6 /* FIWError.swift */; };
+		B7953B38207F52C0000CE9DA /* PathService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7953B37207F52C0000CE9DA /* PathService.swift */; };
 		B7AA39E1205A6EFD00ABE655 /* TileService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7AA39E0205A6EFD00ABE655 /* TileService.swift */; };
 		B7AA39E3205A745700ABE655 /* TileEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7AA39E2205A745700ABE655 /* TileEnum.swift */; };
 		B7B1475B2059B9E1000D0877 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7B1475A2059B9E1000D0877 /* AppDelegate.swift */; };
@@ -56,6 +57,7 @@
 		B73EC23E205BC46C00879A48 /* Global.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Global.swift; sourceTree = "<group>"; };
 		B73EC240205C070D00879A48 /* GameLogic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameLogic.swift; sourceTree = "<group>"; };
 		B76CF56E205FF81100C3FDA6 /* FIWError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FIWError.swift; sourceTree = "<group>"; };
+		B7953B37207F52C0000CE9DA /* PathService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PathService.swift; sourceTree = "<group>"; };
 		B7AA39E0205A6EFD00ABE655 /* TileService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TileService.swift; sourceTree = "<group>"; };
 		B7AA39E2205A745700ABE655 /* TileEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TileEnum.swift; sourceTree = "<group>"; };
 		B7B147572059B9E1000D0877 /* FireInTheWhole.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FireInTheWhole.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -108,6 +110,7 @@
 			isa = PBXGroup;
 			children = (
 				B7AA39E0205A6EFD00ABE655 /* TileService.swift */,
+				B7953B37207F52C0000CE9DA /* PathService.swift */,
 			);
 			path = service;
 			sourceTree = "<group>";
@@ -332,6 +335,7 @@
 				B7B147632059B9E1000D0877 /* GameViewController.swift in Sources */,
 				B73EC23F205BC46C00879A48 /* Global.swift in Sources */,
 				B7F381FC205E346400F7AB48 /* LayersMap.swift in Sources */,
+				B7953B38207F52C0000CE9DA /* PathService.swift in Sources */,
 				3E5F9E5B206C4E1600D6D843 /* Fire.swift in Sources */,
 				B73EC241205C070D00879A48 /* GameLogic.swift in Sources */,
 				B7B1475B2059B9E1000D0877 /* AppDelegate.swift in Sources */,

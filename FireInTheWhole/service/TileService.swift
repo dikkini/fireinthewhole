@@ -22,6 +22,9 @@ class TileService {
     var mapCols: Int
     var tileSize: (width: Int, height: Int)
 
+    var tileMap: [[Int]] = [[]]
+    var traversibleTileMap: [[Int]] = [[]]
+
     init(tileSize: (width: Int, height: Int), mapRows: Int, mapCols: Int) {
         self.tileSize = tileSize
         self.mapRows = mapRows
@@ -38,11 +41,18 @@ class TileService {
         // setup layers
         self.highlightPathLayer25D.zPosition = 999
 
-        self.generateMap()
+        // setup tile map
+        self.tileMap = self.generateMap()
+        self.traversibleTileMap = self.traversableTiles()
+
+        print("TraversibleTileMap")
+        print(self.traversibleTileMap.debugDescription)
+        print("TileMap")
+        print(self.tileMap.debugDescription)
     }
 
-    private func generateMap() {
-        var tiles: [[Int]] = []
+    private func generateMap() -> [[Int]] {
+        var tileMap: [[Int]] = []
         for i in 0..<self.mapCols {
             var tileRow: [Int] = []
             for j in 0..<self.mapRows {
@@ -54,8 +64,6 @@ class TileService {
                 ground.position = point2DTo25D(p: CGPoint(x: (j * self.tileSize.width), y: -(i * self.tileSize.height)))
                 ground.anchorPoint = CGPoint(x: 0.5, y: 0.5)
 
-                tileRow.append(ground.type.rawValue)
-
                 self.groundLayer25D.addChild(ground)
 
                 if (i == 2 && j == 1) || (i == 4 && j == 3) {
@@ -66,10 +74,42 @@ class TileService {
                     char25D.position = point2DTo25D(p: CGPoint(x: (j * self.tileSize.width), y: -(i * self.tileSize.height)))
                     char25D.anchorPoint = CGPoint(x: 0.5, y: 0.5)
                     self.characterLayer25D.addChild(char25D)
+
+                    tileRow.append(char25D.type.rawValue)
+                } else {
+                    tileRow.append(ground.type.rawValue)
                 }
             }
-            tiles.append(tileRow)
+            tileMap.append(tileRow)
         }
+
+        return tileMap
+    }
+    
+    func updateTileMap(oldIndex: CGPoint, newIndex: CGPoint, oldType: TileType, newType: TileType) {
+        print(self.tileMap)
+        self.tileMap[-Int(oldIndex.y)][Int(oldIndex.x)] = oldType.rawValue
+        self.tileMap[-Int(newIndex.y)][Int(newIndex.x)] = newType.rawValue
+        print(self.tileMap)
+    }
+
+    func traversableTiles() -> [[Int]] {
+        var tTiles = [[Int]]()
+
+        func binarize(num: Int) -> Int {
+            if (num != TileType.Ground.rawValue) {
+                return Global.tilePath.nonTraversable
+            } else {
+                return Global.tilePath.traversable
+            }
+        }
+
+        for i in 0..<self.tileMap.count {
+            let tt = self.tileMap[i].map { i in binarize(num: i) }
+            tTiles.append(tt)
+        }
+
+        return tTiles
     }
 
     func setup(scene: SKScene) -> SKScene {
@@ -175,12 +215,12 @@ class TileService {
 
     func highlightMovePoint(move25DPoint: CGPoint) {
         var points = [
-            CGPoint(x: -GameLogic.tileSize.width, y: -GameLogic.tileSize.height/2)
+            CGPoint(x: -GameLogic.tileSize.width, y: -GameLogic.tileSize.height / 2)
             , CGPoint(x: 0, y: 0)
-            , CGPoint(x: GameLogic.tileSize.width, y: -GameLogic.tileSize.height/2)
+            , CGPoint(x: GameLogic.tileSize.width, y: -GameLogic.tileSize.height / 2)
             , CGPoint(x: 0, y: -GameLogic.tileSize.height)
         ]
-        var highlighMoveNode = SKShapeNode(points: &points, count:points.count)
+        var highlighMoveNode = SKShapeNode(points: &points, count: points.count)
         highlighMoveNode.position = move25DPoint
         highlighMoveNode.fillColor = SKColor.green
         self.highlightPathLayer25D.addChild(highlighMoveNode)
@@ -208,6 +248,22 @@ class TileService {
     }
 
 
+    func findPathFrom(from: CGPoint, to: CGPoint) -> [CGPoint]? {
+        let traversable = traversableTiles()
+
+        if (Int(to.x) >= 0)
+            && (Int(to.x) < traversable.count)
+            && (Int(-to.y) >= 0)
+            && (Int(-to.y) < traversable.count) {
+            let pathFinder = PathFinder(xIni: Int(from.x), yIni: Int(from.y), xFin: Int(to.x), yFin: Int(to.y), lvlData: traversable)
+            let myPath = pathFinder.findPath()
+            return myPath
+        } else {
+            return nil
+        }
+    }
+
+
     //         0,0 /\
     //           /    \
     // -32,-16   \    / 32,-16
@@ -223,7 +279,7 @@ class TileService {
         // 1/2p.x - a.x
         let modY = abs((1 / 2) * (p.x - node.position.x))
         let equalY = node.position.y - p.y
-        
+
         let top_lines = -modY + equalY
         let bottom_lines = modY - CGFloat(GameLogic.tileSize.height) + equalY
         if (top_lines >= 0)

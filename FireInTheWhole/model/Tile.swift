@@ -69,14 +69,14 @@ class Tile: SKSpriteNode {
         return SKTexture(imageNamed: image)
     }
     
-    func compassDirection(degrees: CGFloat) {
+    func compassDirection(degrees: CGFloat) -> TileDirection {
         var n_degrees = degrees
         if n_degrees < 0 { n_degrees += 360 }
         
         let directions = [TileDirection.N, TileDirection.NE, TileDirection.E, TileDirection.SE, TileDirection.S, TileDirection.SW, TileDirection.W, TileDirection.NW]
         let index = Int((n_degrees + 22.5) / 45.0) & 7
         let d = directions[index]
-        self.changeDirection(direction: d)
+        return d
     }
 }
 
