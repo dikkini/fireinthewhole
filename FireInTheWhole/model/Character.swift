@@ -30,52 +30,51 @@ class Character: Tile {
             let newPoint2D = pointTileIndexToPoint2D(point: path[i], tileSize: GameLogic.tileSize)
             let newPoint25D = point2DTo25D(p: newPoint2D)
             
-            // вычисляем положение тайла относительно движения (куда смотрит)
+            // calculate tile direction base on turn's degrees
             let deltaY = newPoint2D.y - prevPoint2D.y
             let deltaX = newPoint2D.x - prevPoint2D.x
             let degrees = atan2(deltaX, deltaY) * (180.0 / CGFloat(Double.pi))
             let newDirection = self.compassDirection(degrees: degrees)
+            // change direction and change position2D (may be not important)
             actions.append(SKAction.run({
                 self.changeDirection(direction: newDirection)
                 self.position2D = newPoint2D
             }))
+            
+            // calculate time of moving from point to point base on direction and distance
+            let velocity:Double = Double(GameLogic.tileSize.width)*2
+            var time: Double = 0.0
+            
+            if i == 1 {
+                let d = distance(p1: newPoint2D, p2: prevPoint2D)
+                time = TimeInterval(d/CGFloat(velocity))
+            } else {
+                let baseDuration =  Double(GameLogic.tileSize.width)/velocity
+                var multiplier = 1.0
+                
+                if newDirection == TileDirection.NE
+                    || direction == TileDirection.NW
+                    || direction == TileDirection.SW
+                    || direction == TileDirection.SE {
+                    multiplier = 1.4
+                }
+                
+                time = multiplier*baseDuration
+            }
         
-            let time = calcTime(index: i, fromPoint2D: self.position2D, toPoint2D: newPoint2D, direction: newDirection)
             actions.append(SKAction.move(to: newPoint25D, duration: time))
             
+            // save prev point
             prevPoint2D = newPoint2D
             prevPoint25D = newPoint25D
         }
         
         self.run(SKAction.sequence(actions)) {
+            // when all moves completed get tile index of new position2D and call callback
             let newTileIndexOfChar = point2DToPointTileIndex(point: (self.position2D), tileSize: GameLogic.tileSize)
             completion(newTileIndexOfChar)
         }
         return true
-    }
-    
-    func calcTime(index: Int, fromPoint2D: CGPoint, toPoint2D: CGPoint, direction: TileDirection) -> Double {
-        let velocity:Double = Double(GameLogic.tileSize.width)*2
-        var time: Double = 0.0
-        
-        if index == 1 {
-            let d = distance(p1: toPoint2D, p2: fromPoint2D)
-            time = TimeInterval(d/CGFloat(velocity))
-        } else {
-            let baseDuration =  Double(GameLogic.tileSize.width)/velocity
-            var multiplier = 1.0
-            
-            if direction == TileDirection.NE
-                || direction == TileDirection.NW
-                || direction == TileDirection.SW
-                || direction == TileDirection.SE {
-                multiplier = 1.4
-            }
-            
-            time = multiplier*baseDuration
-        }
-        
-        return time
     }
 
 //    func move(point25D: CGPoint) -> Bool {

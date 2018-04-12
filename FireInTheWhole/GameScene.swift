@@ -78,6 +78,7 @@ class GameScene: SKScene {
                         let newIndex = newTileIndexOfChar
                         let oldType = TileType.Ground
                         let newType = TileType.Character
+                        // updateTileMap (change position of Character, place ground on character old place)
                         self.tileService.updateTileMap(oldIndex: oldIndex, newIndex: newIndex, oldType: oldType, newType: newType)
                     })
                 } else {
