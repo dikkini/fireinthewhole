@@ -10,12 +10,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "FireInTheWhole/model/Character.swift"
-            timestampString = "544999142.2588331"
+            timestampString = "545431106.5522701"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "25"
             endingLineNumber = "25"
-            landmarkName = "move(point25D:)"
+            landmarkName = "move(path:completion:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -26,12 +26,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "FireInTheWhole/model/Character.swift"
-            timestampString = "544999142.2589"
+            timestampString = "545431106.552349"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "24"
             endingLineNumber = "24"
-            landmarkName = "move(point25D:)"
+            landmarkName = "move(path:completion:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -42,7 +42,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "FireInTheWhole/service/TileService.swift"
-            timestampString = "544999883.215528"
+            timestampString = "545486635.008526"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "64"
@@ -58,12 +58,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "FireInTheWhole/model/Character.swift"
-            timestampString = "544999142.260066"
+            timestampString = "545431106.552434"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "59"
             endingLineNumber = "59"
-            landmarkName = "canMoveTo(point25D:)"
+            landmarkName = "move(path:completion:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

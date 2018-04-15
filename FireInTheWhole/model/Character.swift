@@ -18,7 +18,7 @@ class Character: Tile {
         fatalError("init(coder:) has not been implemented")
     }
 
-    private let moveStep: Int = 5
+    private let moveStep: Int = 3
 
     func move(path: [CGPoint], completion: @escaping (CGPoint)->() ) -> Bool {
         

@@ -45,12 +45,14 @@ class GameScene: SKScene {
             self.tileService.highlightCharacterAllowMoves(moveTileIndexList: moves!)
             self.selectedGround25D = nil
         } else if selectedTile is Character && self.selectedCharacter25D !== nil && selectedTile as? Character !== self.selectedCharacter25D { // выбран другой персонаж, не тот что выбран ранее
+            var tt = self.selectedCharacter25D as? Droid
+            
             print("Other character chosen")
             print(self.selectedCharacter25D?.name)
             print(selectedTile?.name)
 
             let targetTile = (selectedTile as? Character)!
-
+            tt?.fire(targetTile: targetTile)
             // TODO определение какой именно character, в зависимости от этого разные действия.
 
         } else if selectedTile is Ground && self.selectedCharacter25D !== nil && self.selectedGround25D == nil { // персонаж выбран и выбрана земля для хода

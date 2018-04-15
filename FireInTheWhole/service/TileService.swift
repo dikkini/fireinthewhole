@@ -76,6 +76,17 @@ class TileService {
                     self.characterLayer25D.addChild(char25D)
 
                     tileRow.append(char25D.type.rawValue)
+                } else if i == 4 && j == 4 {
+                    let charName = NSUUID().uuidString
+
+                    let char25D = Droid.init(type: TileType.Character, action: TileAction.Idle, position2D: position2D, direction: TileDirection.E, imagePrefix: "iso_3d_", canMove: true)
+                    char25D.name = charName
+                    char25D.position = point2DTo25D(p: CGPoint(x: (j * self.tileSize.width), y: -(i * self.tileSize.height)))
+                    char25D.anchorPoint = CGPoint(x: 0.5, y: 0.5)
+                    
+                    self.characterLayer25D.addChild(char25D)
+                    tileRow.append(char25D.type.rawValue)
+                    print("LIZA NE MATERIS")
                 } else {
                     tileRow.append(ground.type.rawValue)
                 }
@@ -85,7 +96,7 @@ class TileService {
 
         return tileMap
     }
-    
+
     func updateTileMap(oldIndex: CGPoint, newIndex: CGPoint, oldType: TileType, newType: TileType) {
         print(self.tileMap)
         self.tileMap[-Int(oldIndex.y)][Int(oldIndex.x)] = oldType.rawValue
@@ -286,8 +297,8 @@ class TileService {
             && (bottom_lines <= 0) {
             return true
         }
-        else {
-            return false
+            else {
+                return false
         }
     }
 }
