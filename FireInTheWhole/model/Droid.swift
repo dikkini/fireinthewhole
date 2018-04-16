@@ -21,8 +21,8 @@ class Droid: Character, Fire {
     }
     
     func initFireBullet() -> SKSpriteNode{
-        var texture = SKTexture(imageNamed: "droid_e.png")
-        var arrowNode = SKSpriteNode(texture: texture, color: .clear, size: CGSize(width:10, height:10))
+        let texture = SKTexture(imageNamed: "droid_e.png")
+        let arrowNode = SKSpriteNode(texture: texture, color: .clear, size: CGSize(width:10, height:10))
         
         arrowNode.position = CGPoint(x:0, y:0)
         arrowNode.anchorPoint = CGPoint(x: 0.5, y: 0.5)
@@ -34,8 +34,8 @@ class Droid: Character, Fire {
     func fire(targetTile: Tile) {
         let arrowNode = initFireBullet()
         // calculate tile direction base on turn's degrees
-        let deltaY = targetTile.position2D.y - point25DTo2D(p: self.position).y
-        let deltaX = targetTile.position2D.x - point25DTo2D(p: self.position).x
+        let deltaY = targetTile.position2D.y - self.position2D.y
+        let deltaX = targetTile.position2D.x - self.position2D.x
         let degrees = atan2(deltaX, deltaY) * (180.0 / CGFloat(Double.pi))
         let newDirection = self.compassDirection(degrees: degrees)
         self.changeDirection(direction: newDirection)
