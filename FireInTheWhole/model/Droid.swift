@@ -10,10 +10,9 @@ import Foundation
 import SpriteKit
 
 class Droid: Character, Fire {
-   
     
-    override init(type: TileType, action: TileAction, position2D: CGPoint, direction: TileDirection, imagePrefix: String? = nil, canMove: Bool? = false) {
-        super.init(type: type, action: action, position2D: position2D, direction: direction, imagePrefix: imagePrefix, canMove: canMove)
+    override init(type: TileType, action: TileAction, position2D: CGPoint, direction: TileDirection, imagePrefix: String? = nil, canMove: Bool? = false, canFire: Bool? = true) {
+        super.init(type: type, action: action, position2D: position2D, direction: direction, imagePrefix: imagePrefix, canMove: canMove, canFire: canFire)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -41,7 +40,7 @@ class Droid: Character, Fire {
         self.changeDirection(direction: newDirection)
 
 // Animation TEST. Problems with pictures?
-//
+//// TODO animation of 
 //        var animationTexture = SKTexture(imageNamed:"iso_3d_droid_e.png")
 //        var animationTexture2 = SKTexture(imageNamed:"iso_3d_droid_e_ANIM.png")
 //        let frames = [animationTexture,animationTexture2, animationTexture]

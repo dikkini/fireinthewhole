@@ -11,12 +11,12 @@ import GameplayKit
 
 class TileService {
 
-    var view25D: SKSpriteNode
+    var mapView: SKSpriteNode
 
-    var groundLayer25D: SKNode
-    var characterLayer25D: SKNode
-    var objectLayer25D: SKNode
-    var highlightPathLayer25D: SKNode
+    var groundLayer: SKNode
+    var characterLayer: SKNode
+    var objectLayer: SKNode
+    var highlightPathLayer: SKNode
 
     var mapRows: Int
     var mapCols: Int
@@ -31,24 +31,19 @@ class TileService {
         self.mapCols = mapCols
 
 
-        self.view25D = SKSpriteNode()
+        self.mapView = SKSpriteNode()
 
-        self.groundLayer25D = SKNode()
-        self.characterLayer25D = SKNode()
-        self.objectLayer25D = SKNode()
-        self.highlightPathLayer25D = SKNode()
+        self.groundLayer = SKNode()
+        self.characterLayer = SKNode()
+        self.objectLayer = SKNode()
+        self.highlightPathLayer = SKNode()
 
         // setup layers
-        self.highlightPathLayer25D.zPosition = 999
+        self.highlightPathLayer.zPosition = 999
 
         // setup tile map
         self.tileMap = self.generateMap()
         self.traversibleTileMap = self.traversableTiles()
-
-        print("TraversibleTileMap")
-        print(self.traversibleTileMap.debugDescription)
-        print("TileMap")
-        print(self.tileMap.debugDescription)
     }
 
     private func generateMap() -> [[Int]] {
@@ -58,35 +53,34 @@ class TileService {
             for j in 0..<self.mapRows {
                 let groundName = NSUUID().uuidString
 
-                var position2D = CGPoint(x: (j * self.tileSize.width), y: -(i * tileSize.height))
-                var ground = Ground.init(type: TileType.Ground, action: TileAction.Idle, position2D: position2D, imagePrefix: "iso_")
+                let position2D = CGPoint(x: (j * self.tileSize.width), y: -(i * tileSize.height))
+                let ground = Ground.init(type: TileType.Ground, action: TileAction.Idle, position2D: position2D, imagePrefix: "iso_")
                 ground.name = groundName
                 ground.position = point2DTo25D(p: CGPoint(x: (j * self.tileSize.width), y: -(i * self.tileSize.height)))
                 ground.anchorPoint = CGPoint(x: 0.5, y: 0.5)
 
-                self.groundLayer25D.addChild(ground)
+                self.groundLayer.addChild(ground)
 
                 if (i == 2 && j == 1) || (i == 4 && j == 3) {
                     let charName = NSUUID().uuidString
 
-                    let char25D = Character.init(type: TileType.Character, action: TileAction.Idle, position2D: position2D, direction: TileDirection.E, imagePrefix: "iso_3d_", canMove: true)
-                    char25D.name = charName
-                    char25D.position = point2DTo25D(p: CGPoint(x: (j * self.tileSize.width), y: -(i * self.tileSize.height)))
-                    char25D.anchorPoint = CGPoint(x: 0.5, y: 0.5)
-                    self.characterLayer25D.addChild(char25D)
+                    let char = Character.init(type: TileType.Character, action: TileAction.Idle, position2D: position2D, direction: TileDirection.E, imagePrefix: "iso_3d_", canMove: true)
+                    char.name = charName
+                    char.position = point2DTo25D(p: CGPoint(x: (j * self.tileSize.width), y: -(i * self.tileSize.height)))
+                    char.anchorPoint = CGPoint(x: 0.5, y: 0.5)
+                    self.characterLayer.addChild(char)
 
-                    tileRow.append(char25D.type.rawValue)
+                    tileRow.append(char.type.rawValue)
                 } else if i == 4 && j == 4 {
                     let charName = NSUUID().uuidString
 
-                    let char25D = Droid.init(type: TileType.Character, action: TileAction.Idle, position2D: position2D, direction: TileDirection.E, imagePrefix: "iso_3d_", canMove: true)
-                    char25D.name = charName
-                    char25D.position = point2DTo25D(p: CGPoint(x: (j * self.tileSize.width), y: -(i * self.tileSize.height)))
-                    char25D.anchorPoint = CGPoint(x: 0.5, y: 0.5)
+                    let droid = Droid.init(type: TileType.Character, action: TileAction.Idle, position2D: position2D, direction: TileDirection.E, imagePrefix: "iso_3d_", canMove: true, canFire: true)
+                    droid.name = charName
+                    droid.position = point2DTo25D(p: CGPoint(x: (j * self.tileSize.width), y: -(i * self.tileSize.height)))
+                    droid.anchorPoint = CGPoint(x: 0.5, y: 0.5)
                     
-                    self.characterLayer25D.addChild(char25D)
-                    tileRow.append(char25D.type.rawValue)
-                    print("LIZA NE MATERIS")
+                    self.characterLayer.addChild(droid)
+                    tileRow.append(droid.type.rawValue)
                 } else {
                     tileRow.append(ground.type.rawValue)
                 }
@@ -135,20 +129,20 @@ class TileService {
 
         let deviceScale = scene.size.width / 667
 
-        self.groundLayer25D.zPosition = 1
-        self.highlightPathLayer25D.zPosition = 2
-        self.objectLayer25D.zPosition = 3
-        self.characterLayer25D.zPosition = 4
+        self.groundLayer.zPosition = 1
+        self.highlightPathLayer.zPosition = 2
+        self.objectLayer.zPosition = 3
+        self.characterLayer.zPosition = 4
 
-        self.view25D.position = CGPoint(x: scene.size.width * -0.05, y: scene.size.height * 0.33)
-        self.view25D.xScale = deviceScale
-        self.view25D.yScale = deviceScale
+        self.mapView.position = CGPoint(x: scene.size.width * -0.05, y: scene.size.height * 0.33)
+        self.mapView.xScale = deviceScale
+        self.mapView.yScale = deviceScale
 
-        self.view25D.addChild(self.groundLayer25D)
-        self.view25D.addChild(self.objectLayer25D)
-        self.view25D.addChild(self.characterLayer25D)
-        self.view25D.addChild(self.highlightPathLayer25D)
-        scene.addChild(self.view25D)
+        self.mapView.addChild(self.groundLayer)
+        self.mapView.addChild(self.objectLayer)
+        self.mapView.addChild(self.characterLayer)
+        self.mapView.addChild(self.highlightPathLayer)
+        scene.addChild(self.mapView)
 
         return scene
     }
@@ -157,21 +151,21 @@ class TileService {
         var touchedTile: Tile? = nil
 
         // try get character layer
-        for character25D in self.characterLayer25D.children {
+        for character25D in self.characterLayer.children {
             //if character25D.contains(touch.location(in: self.characterLayer25D))
-            if (containsCustom(node: character25D, p: touch.location(in: self.characterLayer25D))) {
+            if (containsCustom(node: character25D, p: touch.location(in: self.characterLayer))) {
                 touchedTile = (character25D as? Character)!
                 print("Character touched: " + touchedTile!.debugDescription)
-                print("touch: " + touch.location(in: self.characterLayer25D).debugDescription)
+                print("touch: " + touch.location(in: self.characterLayer).debugDescription)
                 return touchedTile
             }
         }
         // try get ground layer
-        for ground25D in self.groundLayer25D.children {
-            if (containsCustom(node: ground25D, p: touch.location(in: self.groundLayer25D))) {
+        for ground25D in self.groundLayer.children {
+            if (containsCustom(node: ground25D, p: touch.location(in: self.groundLayer))) {
                 touchedTile = (ground25D as? Ground)!
                 print("Ground touched: " + touchedTile!.debugDescription)
-                print("touch: " + touch.location(in: self.characterLayer25D).debugDescription)
+                print("touch: " + touch.location(in: self.characterLayer).debugDescription)
                 return touchedTile
             }
         }
@@ -191,27 +185,27 @@ class TileService {
 
     func highlightCharacterAllowMoves(moveTileIndexList: [CGPoint]) {
         // clean highlights
-        self.highlightPathLayer25D.removeAllChildren()
+        self.highlightPathLayer.removeAllChildren()
 
         for var moveTI in moveTileIndexList {
-            let move25DPoint = point2DTo25D(p: pointTileIndexToPoint2D(point: moveTI, tileSize: GameLogic.tileSize))
+            let movePoint25D = point2DTo25D(p: pointTileIndexToPoint2D(point: moveTI, tileSize: self.tileSize))
             var isChar = false
-            for char in self.characterLayer25D.children {
-                if char.position == move25DPoint {
+            for char in self.characterLayer.children {
+                if char.position == movePoint25D {
                     isChar = true
                 }
             }
             if !isChar {
                 //print("Visualize path: " + move25DPoint.debugDescription)
-                visualizePath(move25DPoint: move25DPoint)
+                visualizePath(movePoint25D: movePoint25D)
             }
         }
     }
 
-    func visualizePath(move25DPoint: CGPoint, test: Bool? = false) {
+    func visualizePath(movePoint25D: CGPoint, test: Bool? = false) {
         // 25D
-        var highlightTile = Ground.init(type: TileType.Ground, action: TileAction.Idle, position2D: point25DTo2D(p: move25DPoint), imagePrefix: "iso_")
-        highlightTile.position = move25DPoint
+        var highlightTile = Ground.init(type: TileType.Ground, action: TileAction.Idle, position2D: point25DTo2D(p: movePoint25D), imagePrefix: "iso_")
+        highlightTile.position = movePoint25D
         highlightTile.anchorPoint = CGPoint(x: 0.5, y: 0.5)
 
         if test! {
@@ -221,28 +215,28 @@ class TileService {
         }
         highlightTile.colorBlendFactor = 1.0
 
-        self.highlightPathLayer25D.addChild(highlightTile)
+        self.highlightPathLayer.addChild(highlightTile)
     }
 
     func highlightMovePoint(move25DPoint: CGPoint) {
         var points = [
-            CGPoint(x: -GameLogic.tileSize.width, y: -GameLogic.tileSize.height / 2)
+            CGPoint(x: -self.tileSize.width, y: -self.tileSize.height / 2)
             , CGPoint(x: 0, y: 0)
-            , CGPoint(x: GameLogic.tileSize.width, y: -GameLogic.tileSize.height / 2)
-            , CGPoint(x: 0, y: -GameLogic.tileSize.height)
+            , CGPoint(x: self.tileSize.width, y: -self.tileSize.height / 2)
+            , CGPoint(x: 0, y: -self.tileSize.height)
         ]
         var highlighMoveNode = SKShapeNode(points: &points, count: points.count)
         highlighMoveNode.position = move25DPoint
         highlighMoveNode.fillColor = SKColor.green
-        self.highlightPathLayer25D.addChild(highlighMoveNode)
+        self.highlightPathLayer.addChild(highlighMoveNode)
     }
 
     // сортировка по глубине, чтобы персонажи не оказались "в текстуре"
     func sortDepth() {
-        let childrenSortedForDepth = self.characterLayer25D.children.sorted() {
+        let childrenSortedForDepth = self.characterLayer.children.sorted() {
 
-            let p0 = point25DTo2D(p: $0.position)
-            let p1 = point25DTo2D(p: $1.position)
+            let p0 = ($0 as? Tile)!.position2D
+            let p1 = ($1 as? Tile)!.position2D
 
             if ((p0.x + (-p0.y)) > (p1.x + (-p1.y))) {
                 return false
@@ -292,7 +286,7 @@ class TileService {
         let equalY = node.position.y - p.y
 
         let top_lines = -modY + equalY
-        let bottom_lines = modY - CGFloat(GameLogic.tileSize.height) + equalY
+        let bottom_lines = modY - CGFloat(self.tileSize.height) + equalY
         if (top_lines >= 0)
             && (bottom_lines <= 0) {
             return true

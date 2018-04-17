@@ -13,20 +13,18 @@ class Tile: SKSpriteNode {
     internal var action: TileAction
     internal var direction: TileDirection?
     internal var imagePrefix: String?
-    internal var canMove: Bool?
     internal var position2D: CGPoint
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    init(type: TileType, action: TileAction = TileAction.Idle, position2D: CGPoint, direction: TileDirection? = nil, imagePrefix: String? = nil, canMove: Bool? = false) {
+    init(type: TileType, action: TileAction = TileAction.Idle, position2D: CGPoint, direction: TileDirection? = nil, imagePrefix: String? = nil) {
         self.type = type
         self.direction = direction
         self.action = action
         self.position2D = position2D
         self.imagePrefix = imagePrefix
-        self.canMove = canMove
         
         var image: String
         if self.imagePrefix != nil {

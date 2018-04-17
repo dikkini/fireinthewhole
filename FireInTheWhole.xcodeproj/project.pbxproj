@@ -29,6 +29,7 @@
 		B7B1478F2059C9CD000D0877 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7B1478E2059C9CC000D0877 /* GameScene.swift */; };
 		B7B147942059CB97000D0877 /* Tile.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7B147932059CB97000D0877 /* Tile.swift */; };
 		B7B147962059CF17000D0877 /* sprites.atlas in Resources */ = {isa = PBXBuildFile; fileRef = B7B147952059CF17000D0877 /* sprites.atlas */; };
+		B7E14EAD2085FA45006AC265 /* menu.atlas in Resources */ = {isa = PBXBuildFile; fileRef = B7E14EAC2085FA39006AC265 /* menu.atlas */; };
 		B7F381FC205E346400F7AB48 /* LayersMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7F381FB205E346400F7AB48 /* LayersMap.swift */; };
 		B7F381FE205EF4A300F7AB48 /* Point.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7F381FD205EF4A300F7AB48 /* Point.swift */; };
 /* End PBXBuildFile section */
@@ -79,6 +80,7 @@
 		B7B1478E2059C9CC000D0877 /* GameScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
 		B7B147932059CB97000D0877 /* Tile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tile.swift; sourceTree = "<group>"; };
 		B7B147952059CF17000D0877 /* sprites.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = sprites.atlas; sourceTree = "<group>"; };
+		B7E14EAC2085FA39006AC265 /* menu.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = menu.atlas; sourceTree = "<group>"; };
 		B7F381FB205E346400F7AB48 /* LayersMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayersMap.swift; sourceTree = "<group>"; };
 		B7F381FD205EF4A300F7AB48 /* Point.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Point.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -148,6 +150,7 @@
 				B7B1475E2059B9E1000D0877 /* Actions.sks */,
 				B7B147642059B9E1000D0877 /* Main.storyboard */,
 				B7B147672059B9E1000D0877 /* Assets.xcassets */,
+				B7E14EAC2085FA39006AC265 /* menu.atlas */,
 				B7B147952059CF17000D0877 /* sprites.atlas */,
 				B7B147692059B9E1000D0877 /* LaunchScreen.storyboard */,
 				B7B1476C2059B9E1000D0877 /* Info.plist */,
@@ -299,6 +302,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B7E14EAD2085FA45006AC265 /* menu.atlas in Resources */,
 				B7B147962059CF17000D0877 /* sprites.atlas in Resources */,
 				B7B147662059B9E1000D0877 /* Main.storyboard in Resources */,
 				B7B147682059B9E1000D0877 /* Assets.xcassets in Resources */,

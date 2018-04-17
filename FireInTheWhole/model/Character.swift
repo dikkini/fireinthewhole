@@ -9,9 +9,14 @@ import Foundation
 import SpriteKit
 
 class Character: Tile {
+    
+    internal var canMove: Bool? = true
+    internal var canFire: Bool? = false
 
-    init(type: TileType, action: TileAction, position2D: CGPoint, direction: TileDirection, imagePrefix: String? = nil, canMove: Bool? = false) {
-        super.init(type: type, action: action, position2D: position2D, direction: direction, imagePrefix: imagePrefix, canMove: canMove)
+    init(type: TileType, action: TileAction, position2D: CGPoint, direction: TileDirection, imagePrefix: String? = nil, canMove: Bool? = true, canFire: Bool? = false) {
+        self.canMove = canMove
+        self.canFire = canFire
+        super.init(type: type, action: action, position2D: position2D, direction: direction, imagePrefix: imagePrefix)
     }
 
     required init?(coder aDecoder: NSCoder) {
