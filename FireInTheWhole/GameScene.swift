@@ -58,16 +58,9 @@ class GameScene: SKScene {
             self.tileService.highlightCharacterAllowMoves(moveTileIndexList: moves!)
             self.selectedGround = nil
         } else if selectedTile is Character && self.selectedCharacter !== nil && selectedTile as? Character !== self.selectedCharacter { // выбран другой персонаж, не тот что выбран ранее
-            var tt = self.selectedCharacter as? Droid
-            
             print("Other character chosen")
-            print(self.selectedCharacter?.name)
-            print(selectedTile?.name)
-
             self.targetTile = (selectedTile as? Character)!
-            
-            // TODO определение какой именно character, в зависимости от этого разные действия.
-            
+        
             self.showCharacterActionsMenu(char: self.selectedCharacter!)
 
         } else if selectedTile is Ground && self.selectedCharacter !== nil && self.selectedGround == nil { // персонаж выбран и выбрана земля для хода
@@ -79,6 +72,7 @@ class GameScene: SKScene {
                 self.tileService.highlightMovePoint(move25DPoint: (self.selectedGround?.position)!)
             } else { //иначе убрать выделение
                 print("Character can't move to ground point. Remove highlights - reset move action!")
+                self.hideCharacterActionsMenu()
                 self.tileService.highlightPathLayer.removeAllChildren()
                 self.selectedGround = nil
                 self.selectedCharacter = nil
@@ -90,7 +84,6 @@ class GameScene: SKScene {
                 let fromPos2D = point25DTo2D(p: (self.selectedCharacter?.position)!)
                 let path = self.tileService.findPathFrom(from: point2DToPointTileIndex(point: fromPos2D, tileSize: GameLogic.tileSize), to: point2DToPointTileIndex(point: toPos2D, tileSize: GameLogic.tileSize))
                 if path != nil {
-                    // TODO здесь надо удостоверится что персонаж точно сможет пойти
                     let tileIndexOfChar = point2DToPointTileIndex(point: (self.selectedCharacter?.position2D)!, tileSize: GameLogic.tileSize)
                     self.selectedCharacter!.move(path: path!, completion: {newTileIndexOfChar in
                         let oldIndex = tileIndexOfChar
