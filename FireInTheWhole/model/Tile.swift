@@ -48,6 +48,11 @@ class Tile: SKSpriteNode {
         self.update()
     }
 
+    func changeDirection(newPoint2D: CGPoint, prevPoint2D: CGPoint) {
+        self.direction = self.compassDirection(newPoint2D: newPoint2D, prevPoint2D: prevPoint2D)
+        self.update()
+    }
+
     // метод обновления тайла
     func update() {
         self.texture = self.getTileTexture()
@@ -68,14 +73,18 @@ class Tile: SKSpriteNode {
         return SKTexture(imageNamed: image)
     }
 
-    func compassDirection(degrees: CGFloat) -> TileDirection {
-        var n_degrees = degrees
-        if n_degrees < 0 {
-            n_degrees += 360
+    func compassDirection(newPoint2D: CGPoint, prevPoint2D: CGPoint) -> TileDirection {
+        let deltaX = newPoint2D.x - prevPoint2D.x
+        let deltaY = newPoint2D.y - prevPoint2D.y
+        var degrees = atan2(deltaX, deltaY) * (180.0 / CGFloat(Double.pi))
+
+        if degrees < 0 {
+            degrees += 360
         }
 
-        let directions = [TileDirection.N, TileDirection.NE, TileDirection.E, TileDirection.SE, TileDirection.S, TileDirection.SW, TileDirection.W, TileDirection.NW]
-        let index = Int((n_degrees + 22.5) / 45.0) & 7
+        let directions = [TileDirection.N, TileDirection.NE, TileDirection.E, TileDirection.SE, TileDirection.S,
+                          TileDirection.SW, TileDirection.W, TileDirection.NW]
+        let index = Int((degrees + 22.5) / 45.0) & 7
         let d = directions[index]
         return d
     }

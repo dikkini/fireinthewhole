@@ -11,8 +11,12 @@ import SpriteKit
 
 class Droid: Character, Fire {
 
-    override init(type: TileType, action: TileAction, position2D: CGPoint, direction: TileDirection, imagePrefix: String? = nil, canMove: Bool? = false, canFire: Bool? = true) {
-        super.init(type: type, action: action, position2D: position2D, direction: direction, imagePrefix: imagePrefix, canMove: canMove, canFire: canFire)
+    internal var damage: Int = 1
+
+    init(type: TileType, action: TileAction, position2D: CGPoint, direction: TileDirection,
+                  imagePrefix: String? = nil, canMove: Bool? = false, canFire: Bool? = true) {
+        super.init(type: type, action: action, position2D: position2D, direction: direction, imagePrefix: imagePrefix,
+                canMove: canMove, canFire: canFire)
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -20,8 +24,8 @@ class Droid: Character, Fire {
     }
 
     func initFireBullet() -> SKSpriteNode {
-        let texture = SKTexture(imageNamed: "droid_e.png")
-        let arrowNode = SKSpriteNode(texture: texture, color: .clear, size: CGSize(width: 10, height: 10))
+        let texture = SKTexture(imageNamed: "droid_e")
+        let arrowNode = SKSpriteNode(texture: texture, color: .clear, size: texture.size())
 
         arrowNode.position = CGPoint(x: 0, y: 0)
         arrowNode.anchorPoint = CGPoint(x: 0.5, y: 0.5)
@@ -30,23 +34,14 @@ class Droid: Character, Fire {
         return arrowNode
     }
 
-    func fire(targetTile: Tile) {
+    func fire(targetTile: Character) {
         let arrowNode = initFireBullet()
         // calculate tile direction base on turn's degrees
-        let deltaY = targetTile.position2D.y - self.position2D.y
-        let deltaX = targetTile.position2D.x - self.position2D.x
-        let degrees = atan2(deltaX, deltaY) * (180.0 / CGFloat(Double.pi))
-        let newDirection = self.compassDirection(degrees: degrees)
+
+        let newDirection = self.compassDirection(newPoint2D: targetTile.position2D, prevPoint2D: self.position2D)
         self.changeDirection(direction: newDirection)
 
-// Animation TEST. Problems with pictures?
-//// TODO animation of
-//        var animationTexture = SKTexture(imageNamed:"iso_3d_droid_e")
-//        var animationTexture2 = SKTexture(imageNamed:"iso_3d_droid_e_ANIM.")
-//        let frames = [animationTexture,animationTexture2, animationTexture]
-//
-//        self.run(SKAction.animate(with: frames, timePerFrame: 1))
-//        Fire
+        // TODO animation
         let relativeY = targetTile.position.y - self.position.y
         let relativeX = targetTile.position.x - self.position.x
 
@@ -58,7 +53,9 @@ class Droid: Character, Fire {
         arrowNode.run(sequence) {
             //Action after fire
             targetTile.run(SKAction.fadeOut(withDuration: 0.2)) {
-                targetTile.run(SKAction.fadeIn(withDuration: 0.2))
+                targetTile.run(SKAction.fadeIn(withDuration: 0.2)) {
+                    targetTile.takeDamage(damage: self.damage)
+                }
             }
         }
 

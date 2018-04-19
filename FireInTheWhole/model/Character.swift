@@ -11,36 +11,51 @@ import SpriteKit
 
 class Character: Tile {
 
-    internal var canMove: Bool? = true
-    internal var canFire: Bool? = false
+    internal var lives: Int
+    internal var livesSprite: SKSpriteNode
+    internal var moveStep: Int = 3
 
-    init(type: TileType, action: TileAction, position2D: CGPoint, direction: TileDirection, imagePrefix: String? = nil, canMove: Bool? = true, canFire: Bool? = false) {
-        self.canMove = canMove
-        self.canFire = canFire
+    internal var canMove: Bool
+    internal var canFire: Bool
+
+    init(type: TileType, action: TileAction, position2D: CGPoint, direction: TileDirection, imagePrefix: String? = nil,
+         lives: Int? = 5, canMove: Bool? = true, canFire: Bool? = false) {
+        self.canMove = canMove!
+        self.canFire = canFire!
+        self.lives = lives!
+
+        let texture = SKTexture(imageNamed: "lives_" + String(self.lives))
+        self.livesSprite = SKSpriteNode(texture: texture, color: .clear, size: texture.size())
         super.init(type: type, action: action, position2D: position2D, direction: direction, imagePrefix: imagePrefix)
+
+        self.livesSprite.position = CGPoint(x: self.position.x, y: self.position.y + 30)
+        self.livesSprite.anchorPoint = CGPoint(x: 0.5, y: 0.5)
+        self.livesSprite.zPosition = 9999
+        self.livesSprite.name = "lives"
+        self.addChild(self.livesSprite)
     }
 
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
-    private let moveStep: Int = 3
+    override func update() {
+        let texture = SKTexture(imageNamed: "lives_" + String(self.lives))
+        self.livesSprite.texture = texture
+        super.update()
+    }
 
-    func move(path: [CGPoint], completion: @escaping (CGPoint) -> ()) -> Bool {
+    func move(path: [CGPoint], completion: @escaping (CGPoint) -> ()) {
 
         var prevPoint2D = self.position2D
-        var prevPoint25D = self.position
+        //var prevPoint25D = self.position
         var actions = [SKAction]()
 
         for i in 1..<path.count {
             let newPoint2D = pointTileIndexToPoint2D(point: path[i], tileSize: GameLogic.tileSize)
             let newPoint25D = point2DTo25D(p: newPoint2D)
 
-            // calculate tile direction base on turn's degrees
-            let deltaY = newPoint2D.y - prevPoint2D.y
-            let deltaX = newPoint2D.x - prevPoint2D.x
-            let degrees = atan2(deltaX, deltaY) * (180.0 / CGFloat(Double.pi))
-            let newDirection = self.compassDirection(degrees: degrees)
+            let newDirection = self.compassDirection(newPoint2D: newPoint2D, prevPoint2D: prevPoint2D)
             // change direction and change position2D (may be not important)
             actions.append(SKAction.run({
                 self.changeDirection(direction: newDirection)
@@ -72,7 +87,7 @@ class Character: Tile {
 
             // save prev point
             prevPoint2D = newPoint2D
-            prevPoint25D = newPoint25D
+            //prevPoint25D = newPoint25D
         }
 
         self.run(SKAction.sequence(actions)) {
@@ -80,7 +95,6 @@ class Character: Tile {
             let newTileIndexOfChar = point2DToPointTileIndex(point: (self.position2D), tileSize: GameLogic.tileSize)
             completion(newTileIndexOfChar)
         }
-        return true
     }
 
     func canMoveTo(point25D: CGPoint) -> Bool {
@@ -119,5 +133,20 @@ class Character: Tile {
         }
 
         return possibleMoveList
+    }
+
+    func takeDamage(damage: Int) {
+        if self.lives <= damage {
+            self.death()
+        } else {
+            self.lives -= damage
+            self.update()
+        }
+    }
+
+    func death() {
+        self.run(SKAction.fadeOut(withDuration: 0.2)) {
+            self.run(SKAction.removeFromParent())
+        }
     }
 }

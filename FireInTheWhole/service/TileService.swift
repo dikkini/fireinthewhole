@@ -64,7 +64,7 @@ class TileService {
                 if (i == 2 && j == 1) || (i == 4 && j == 3) {
                     let charName = NSUUID().uuidString
 
-                    let char = Character.init(type: TileType.Character, action: TileAction.Idle, position2D: position2D, direction: TileDirection.E, imagePrefix: "iso_3d_", canMove: true)
+                    let char = Droid.init(type: TileType.Character, action: TileAction.Idle, position2D: position2D, direction: TileDirection.E, imagePrefix: "iso_3d_", canMove: true)
                     char.name = charName
                     char.position = point2DTo25D(p: CGPoint(x: (j * self.tileSize.width), y: -(i * self.tileSize.height)))
                     char.anchorPoint = CGPoint(x: 0.5, y: 0.5)
@@ -119,7 +119,7 @@ class TileService {
         return tTiles
     }
 
-    func setup(scene: SKScene) -> SKScene {
+    func setup(scene: SKScene) {
         // background
         let background = SKSpriteNode(imageNamed: "background.png")
         background.position = CGPoint(x: 0, y: 0)
@@ -145,8 +145,6 @@ class TileService {
         self.mapView.addChild(self.characterLayer)
         self.mapView.addChild(self.highlightPathLayer)
         scene.addChild(self.mapView)
-
-        return scene
     }
 
     func getTouchedTile(touch: UITouch) -> Tile? {
