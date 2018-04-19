@@ -6,29 +6,21 @@
 //  Copyright © 2018 Artur Karapetov. All rights reserved.
 //
 
-//
-//  Utils.swift
-//  FireInTheWhole
-//
-//  Created by dikkini on 15/03/2018.
-//  Copyright © 2018 Artur Karapetov. All rights reserved.
-//
-
 import GameplayKit
 
-func + (left: CGPoint, right: CGPoint) -> CGPoint {
+func +(left: CGPoint, right: CGPoint) -> CGPoint {
     return CGPoint(x: left.x + right.x, y: left.y + right.y)
 }
 
-func - (left: CGPoint, right: CGPoint) -> CGPoint {
+func -(left: CGPoint, right: CGPoint) -> CGPoint {
     return CGPoint(x: left.x - right.x, y: left.y - right.y)
 }
 
-func * (point: CGPoint, scalar: CGPoint) -> CGPoint {
+func *(point: CGPoint, scalar: CGPoint) -> CGPoint {
     return CGPoint(x: point.x * scalar.x, y: point.y * scalar.y)
 }
 
-func / (point: CGPoint, scalar: CGPoint) -> CGPoint {
+func /(point: CGPoint, scalar: CGPoint) -> CGPoint {
     return CGPoint(x: point.x / scalar.x, y: point.y / scalar.y)
 }
 
@@ -49,42 +41,44 @@ func ceil(point: CGPoint) -> CGPoint {
 }
 
 func point2DTo25D(p: CGPoint) -> CGPoint {
-    
+
     //invert y pre conversion
     var point = p * CGPoint(x: 1, y: -1)
-    
+
     //convert using algorithm
     point = CGPoint(x: (point.x - point.y), y: ((point.x + point.y) / 2))
-    
+
     //invert y post conversion
     point = point * CGPoint(x: 1, y: -1)
-    
+
     return point
-    
-}
-func point25DTo2D(p: CGPoint) -> CGPoint {
-    
-    //invert y pre conversion
-    var point = p * CGPoint(x: 1, y: -1)
-    
-    //convert using algorithm
-    point = CGPoint(x: ((2 * point.y + point.x) / 2), y: ((2 * point.y - point.x) / 2))
-    
-    //invert y post conversion
-    point = point * CGPoint(x: 1, y: -1)
-    
-    return point
-    
+
 }
 
-func point2DToPointTileIndex(point:CGPoint, tileSize: (width: Int, height: Int)) -> CGPoint {
-    
-    return floor(point: point / CGPoint(x: tileSize.width, y: tileSize.height))
-    
+func point25DTo2D(p: CGPoint) -> CGPoint {
+
+    //invert y pre conversion
+    var point = p * CGPoint(x: 1, y: -1)
+
+    //convert using algorithm
+    point = CGPoint(x: ((2 * point.y + point.x) / 2), y: ((2 * point.y - point.x) / 2))
+
+    //invert y post conversion
+    point = point * CGPoint(x: 1, y: -1)
+
+    return point
+
 }
-func pointTileIndexToPoint2D(point:CGPoint, tileSize: (width: Int, height: Int)) -> CGPoint {
-    
+
+func point2DToPointTileIndex(point: CGPoint, tileSize: (width: Int, height: Int)) -> CGPoint {
+
+    return floor(point: point / CGPoint(x: tileSize.width, y: tileSize.height))
+
+}
+
+func pointTileIndexToPoint2D(point: CGPoint, tileSize: (width: Int, height: Int)) -> CGPoint {
+
     return point * CGPoint(x: tileSize.width, y: tileSize.height)
-    
+
 }
 

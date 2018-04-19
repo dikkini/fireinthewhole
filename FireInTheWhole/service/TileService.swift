@@ -78,7 +78,7 @@ class TileService {
                     droid.name = charName
                     droid.position = point2DTo25D(p: CGPoint(x: (j * self.tileSize.width), y: -(i * self.tileSize.height)))
                     droid.anchorPoint = CGPoint(x: 0.5, y: 0.5)
-                    
+
                     self.characterLayer.addChild(droid)
                     tileRow.append(droid.type.rawValue)
                 } else {
@@ -110,7 +110,9 @@ class TileService {
         }
 
         for i in 0..<self.tileMap.count {
-            let tt = self.tileMap[i].map { i in binarize(num: i) }
+            let tt = self.tileMap[i].map { i in
+                binarize(num: i)
+            }
             tTiles.append(tt)
         }
 
@@ -175,7 +177,9 @@ class TileService {
 
     func compassDirection(degrees: CGFloat) -> TileDirection {
         var n_degrees = degrees
-        if n_degrees < 0 { n_degrees += 360 }
+        if n_degrees < 0 {
+            n_degrees += 360
+        }
 
         let directions = [TileDirection.N, TileDirection.NE, TileDirection.E, TileDirection.SE, TileDirection.S, TileDirection.SW, TileDirection.W, TileDirection.NW]
         let index = Int((n_degrees + 22.5) / 45.0) & 7
@@ -204,7 +208,7 @@ class TileService {
 
     func visualizePath(movePoint25D: CGPoint, test: Bool? = false) {
         // 25D
-        var highlightTile = Ground.init(type: TileType.Ground, action: TileAction.Idle, position2D: point25DTo2D(p: movePoint25D), imagePrefix: "iso_")
+        let highlightTile = Ground.init(type: TileType.Ground, action: TileAction.Idle, position2D: point25DTo2D(p: movePoint25D), imagePrefix: "iso_")
         highlightTile.position = movePoint25D
         highlightTile.anchorPoint = CGPoint(x: 0.5, y: 0.5)
 
@@ -225,7 +229,7 @@ class TileService {
             , CGPoint(x: self.tileSize.width, y: -self.tileSize.height / 2)
             , CGPoint(x: 0, y: -self.tileSize.height)
         ]
-        var highlighMoveNode = SKShapeNode(points: &points, count: points.count)
+        let highlighMoveNode = SKShapeNode(points: &points, count: points.count)
         highlighMoveNode.position = move25DPoint
         highlighMoveNode.fillColor = SKColor.green
         self.highlightPathLayer.addChild(highlighMoveNode)
@@ -257,9 +261,9 @@ class TileService {
         let traversable = traversableTiles()
 
         if (Int(to.x) >= 0)
-            && (Int(to.x) < traversable.count)
-            && (Int(-to.y) >= 0)
-            && (Int(-to.y) < traversable.count) {
+                   && (Int(to.x) < traversable.count)
+                   && (Int(-to.y) >= 0)
+                   && (Int(-to.y) < traversable.count) {
             let pathFinder = PathFinder(xIni: Int(from.x), yIni: Int(from.y), xFin: Int(to.x), yFin: Int(to.y), lvlData: traversable)
             let myPath = pathFinder.findPath()
             return myPath
@@ -288,11 +292,10 @@ class TileService {
         let top_lines = -modY + equalY
         let bottom_lines = modY - CGFloat(self.tileSize.height) + equalY
         if (top_lines >= 0)
-            && (bottom_lines <= 0) {
+                   && (bottom_lines <= 0) {
             return true
-        }
-            else {
-                return false
+        } else {
+            return false
         }
     }
 }

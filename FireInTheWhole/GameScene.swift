@@ -5,6 +5,7 @@
 //  Created by dikkini on 14/03/2018.
 //  Copyright © 2018 Artur Karapetov. All rights reserved.
 //
+
 import Foundation
 import SpriteKit
 import GameplayKit
@@ -31,12 +32,13 @@ class GameScene: SKScene {
     var selectedCharacter: Character? = nil
     var targetTile: Character? = nil
     var selectedGround: Ground? = nil
+
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         // Choose one of the touches to work with
         guard let touch = touches.first else {
             return
         }
-        
+
         enumerateChildNodes(withName: "//*", using: { (node, stop) in
             if node.name == "fire_btn" {
                 if node.contains(touch.location(in: self)) {
@@ -49,7 +51,7 @@ class GameScene: SKScene {
         })
 
         let selectedTile = self.tileService.getTouchedTile(touch: touch)
-        
+
         if selectedTile is Character && (self.selectedCharacter == nil || selectedTile == self.selectedCharacter) { // первый раз выбран персонаж
             print("Character chosen for the first time")
             self.selectedCharacter = selectedTile as? Character
@@ -60,7 +62,7 @@ class GameScene: SKScene {
         } else if selectedTile is Character && self.selectedCharacter !== nil && selectedTile as? Character !== self.selectedCharacter { // выбран другой персонаж, не тот что выбран ранее
             print("Other character chosen")
             self.targetTile = (selectedTile as? Character)!
-        
+
             self.showCharacterActionsMenu(char: self.selectedCharacter!)
 
         } else if selectedTile is Ground && self.selectedCharacter !== nil && self.selectedGround == nil { // персонаж выбран и выбрана земля для хода
@@ -85,7 +87,7 @@ class GameScene: SKScene {
                 let path = self.tileService.findPathFrom(from: point2DToPointTileIndex(point: fromPos2D, tileSize: GameLogic.tileSize), to: point2DToPointTileIndex(point: toPos2D, tileSize: GameLogic.tileSize))
                 if path != nil {
                     let tileIndexOfChar = point2DToPointTileIndex(point: (self.selectedCharacter?.position2D)!, tileSize: GameLogic.tileSize)
-                    self.selectedCharacter!.move(path: path!, completion: {newTileIndexOfChar in
+                    self.selectedCharacter!.move(path: path!, completion: { newTileIndexOfChar in
                         let oldIndex = tileIndexOfChar
                         let newIndex = newTileIndexOfChar
                         let oldType = TileType.Ground
@@ -112,29 +114,29 @@ class GameScene: SKScene {
             }
         }
     }
-    
+
     func showCharacterActionsMenu(char: Character) {
         let menuLayer = SKNode()
         menuLayer.name = "char_menu"
         menuLayer.zPosition = 999
-        
+
         if char.canFire! {
             let fireButton = SKSpriteNode(imageNamed: "fire_button")
             fireButton.name = "fire_btn"
             fireButton.anchorPoint = CGPoint(x: 0.5, y: 0.5)
             fireButton.position = CGPoint(x: -250, y: 170)
             fireButton.zPosition = 100
-            
+
             menuLayer.addChild(fireButton)
         }
-        
+
         // ...
         // more more buttons
         // ...
-        
+
         self.addChild(menuLayer)
     }
-    
+
     func hideCharacterActionsMenu() {
         self.childNode(withName: "char_menu")?.removeFromParent()
     }
@@ -142,6 +144,7 @@ class GameScene: SKScene {
     // TOOD опции?
     let nthFrame = 6
     var nthFrameCount = 0
+
     override func update(_ currentTime: TimeInterval) {
         self.nthFrameCount += 1
         if (self.nthFrameCount == self.nthFrame) {

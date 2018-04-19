@@ -5,12 +5,13 @@
 //  Created by dikkini on 15/03/2018.
 //  Copyright © 2018 Artur Karapetov. All rights reserved.
 //
+
 import Foundation
 
 enum TileType: Int {
-    
+
     case Ground, Wall, Character
-    
+
     var name: String {
         switch self {
         case .Ground: return "ground"
@@ -22,7 +23,7 @@ enum TileType: Int {
 
 enum TileAction: Int {
     case Idle, Move
-    
+
     var name: String {
         switch self {
         case .Idle: return "idle"

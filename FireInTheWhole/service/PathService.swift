@@ -48,6 +48,7 @@ class PathFinder {
         openList[String(iniX) + " " + String(iniY)] = node
 
     }
+
     func findPath() -> [CGPoint] {
 
         searchLevel()
@@ -58,6 +59,7 @@ class PathFinder {
         pathWithYInversionRestored.reverse()
         return pathWithYInversionRestored
     }
+
     func searchLevel() {
 
         var curNode: PathNode?
@@ -114,8 +116,7 @@ class PathFinder {
 
                     if ((col >= 0 && col < level[0].count)
                             && (row >= 0 && row < level.count)
-                            && (i != 0 || j != 0))
-                        {
+                            && (i != 0 || j != 0)) {
 
                         //if traversable, not on closed list, and not already on open list - add to open list
 
@@ -123,8 +124,7 @@ class PathFinder {
 
                         if ((level[row][col] == Global.tilePath.traversable)
                                 && (closedList[listKey] == nil)
-                                && (openList[listKey] == nil))
-                            {
+                                && (openList[listKey] == nil)) {
 
                             //prevent cutting corners on diagonal movement
 
@@ -136,30 +136,30 @@ class PathFinder {
                                 if ((i == -1) && (j == -1)) {
                                     //is top-left, check left and top nodes
                                     if (level[row][col + 1] != Global.tilePath.traversable //top
-                                        || level[row + 1][col] != Global.tilePath.traversable //left
-                                        ) {
+                                            || level[row + 1][col] != Global.tilePath.traversable //left
+                                       ) {
                                         moveIsAllowed = false
                                     }
 
                                 } else if ((i == 1) && (j == -1)) {
                                     //is top-right, check top and right nodes
                                     if (level[row][col - 1] != Global.tilePath.traversable //top
-                                        || level[row + 1][col] != Global.tilePath.traversable //right
-                                        ) {
+                                            || level[row + 1][col] != Global.tilePath.traversable //right
+                                       ) {
                                         moveIsAllowed = false
                                     }
                                 } else if ((i == -1) && (j == 1)) {
                                     //is bottom-left,check bottom and left nodes
                                     if (level[row][col + 1] != Global.tilePath.traversable //bottom
-                                        || level[row - 1][col] != Global.tilePath.traversable //left
-                                        ) {
+                                            || level[row - 1][col] != Global.tilePath.traversable //left
+                                       ) {
                                         moveIsAllowed = false
                                     }
                                 } else if ((i == 1) && (j == 1)) {
                                     //is bottom-right, check bottom and right nodes
                                     if (level[row][col - 1] != Global.tilePath.traversable //bottom
-                                        || level[row - 1][col] != Global.tilePath.traversable //right
-                                        ) {
+                                            || level[row - 1][col] != Global.tilePath.traversable //right
+                                       ) {
                                         moveIsAllowed = false
                                     }
                                 }

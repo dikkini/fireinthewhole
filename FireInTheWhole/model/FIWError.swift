@@ -8,6 +8,6 @@
 
 import Foundation
 
-enum FIWError : Error {
+enum FIWError: Error {
     case MoveTileError(String)
 }
