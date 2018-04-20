@@ -9,6 +9,10 @@
 /* Begin PBXBuildFile section */
 		3E2FEFF42081666400A1EEB3 /* Droid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E2FEFF32081666400A1EEB3 /* Droid.swift */; };
 		3E5F9E5B206C4E1600D6D843 /* Fire.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E5F9E5A206C4E1600D6D843 /* Fire.swift */; };
+		6332006EE15D283027ED001C /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63320587CDD32DCFB167BCB9 /* GameScene.swift */; };
+		633200FFF2935A12B152F65A /* BaseScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 633209560D6DD1AE476D729B /* BaseScene.swift */; };
+		6332012CFF2191C291820181 /* MenuService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 633207648115F80E739E3353 /* MenuService.swift */; };
+		633208457CBB218FFC359B2A /* MainMenuScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63320585F8D72AADF4601DAF /* MainMenuScene.swift */; };
 		B73EC237205A877700879A48 /* Wall.swift in Sources */ = {isa = PBXBuildFile; fileRef = B73EC236205A877700879A48 /* Wall.swift */; };
 		B73EC239205AA47A00879A48 /* Ground.swift in Sources */ = {isa = PBXBuildFile; fileRef = B73EC238205AA47A00879A48 /* Ground.swift */; };
 		B73EC23B205AA48500879A48 /* Character.swift in Sources */ = {isa = PBXBuildFile; fileRef = B73EC23A205AA48500879A48 /* Character.swift */; };
@@ -25,7 +29,7 @@
 		B7B1476B2059B9E1000D0877 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B7B147692059B9E1000D0877 /* LaunchScreen.storyboard */; };
 		B7B147762059B9E2000D0877 /* FireInTheWholeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7B147752059B9E2000D0877 /* FireInTheWholeTests.swift */; };
 		B7B147812059B9E2000D0877 /* FireInTheWholeUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7B147802059B9E2000D0877 /* FireInTheWholeUITests.swift */; };
-		B7B1478F2059C9CD000D0877 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7B1478E2059C9CC000D0877 /* GameScene.swift */; };
+		B7B1478F2059C9CD000D0877 /* PlayGroundScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7B1478E2059C9CC000D0877 /* PlayGroundScene.swift */; };
 		B7B147942059CB97000D0877 /* Tile.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7B147932059CB97000D0877 /* Tile.swift */; };
 		B7B147962059CF17000D0877 /* sprites.atlas in Resources */ = {isa = PBXBuildFile; fileRef = B7B147952059CF17000D0877 /* sprites.atlas */; };
 		B7B5F0E62088B4AD009A2473 /* PathService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7B5F0E52088B4AD009A2473 /* PathService.swift */; };
@@ -54,6 +58,10 @@
 /* Begin PBXFileReference section */
 		3E2FEFF32081666400A1EEB3 /* Droid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Droid.swift; sourceTree = "<group>"; };
 		3E5F9E5A206C4E1600D6D843 /* Fire.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fire.swift; sourceTree = "<group>"; };
+		63320585F8D72AADF4601DAF /* MainMenuScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainMenuScene.swift; sourceTree = "<group>"; };
+		63320587CDD32DCFB167BCB9 /* GameScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
+		633207648115F80E739E3353 /* MenuService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuService.swift; sourceTree = "<group>"; };
+		633209560D6DD1AE476D729B /* BaseScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseScene.swift; sourceTree = "<group>"; };
 		B73EC236205A877700879A48 /* Wall.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Wall.swift; sourceTree = "<group>"; };
 		B73EC238205AA47A00879A48 /* Ground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ground.swift; sourceTree = "<group>"; };
 		B73EC23A205AA48500879A48 /* Character.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Character.swift; sourceTree = "<group>"; };
@@ -76,7 +84,7 @@
 		B7B1477C2059B9E2000D0877 /* FireInTheWholeUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FireInTheWholeUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B7B147802059B9E2000D0877 /* FireInTheWholeUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FireInTheWholeUITests.swift; sourceTree = "<group>"; };
 		B7B147822059B9E2000D0877 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		B7B1478E2059C9CC000D0877 /* GameScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
+		B7B1478E2059C9CC000D0877 /* PlayGroundScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayGroundScene.swift; sourceTree = "<group>"; };
 		B7B147932059CB97000D0877 /* Tile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tile.swift; sourceTree = "<group>"; };
 		B7B147952059CF17000D0877 /* sprites.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = sprites.atlas; sourceTree = "<group>"; };
 		B7B5F0E52088B4AD009A2473 /* PathService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PathService.swift; sourceTree = "<group>"; };
@@ -115,6 +123,7 @@
 			children = (
 				B7AA39E0205A6EFD00ABE655 /* TileService.swift */,
 				B7B5F0E52088B4AD009A2473 /* PathService.swift */,
+				633207648115F80E739E3353 /* MenuService.swift */,
 			);
 			path = service;
 			sourceTree = "<group>";
@@ -143,7 +152,7 @@
 			isa = PBXGroup;
 			children = (
 				B7AA39DF205A6EEC00ABE655 /* service */,
-				B7B1478E2059C9CC000D0877 /* GameScene.swift */,
+				B7B1478E2059C9CC000D0877 /* PlayGroundScene.swift */,
 				B7B147622059B9E1000D0877 /* GameViewController.swift */,
 				B7B147902059CB40000D0877 /* model */,
 				B7B1475A2059B9E1000D0877 /* AppDelegate.swift */,
@@ -154,6 +163,9 @@
 				B7B147952059CF17000D0877 /* sprites.atlas */,
 				B7B147692059B9E1000D0877 /* LaunchScreen.storyboard */,
 				B7B1476C2059B9E1000D0877 /* Info.plist */,
+				63320585F8D72AADF4601DAF /* MainMenuScene.swift */,
+				633209560D6DD1AE476D729B /* BaseScene.swift */,
+				63320587CDD32DCFB167BCB9 /* GameScene.swift */,
 			);
 			path = FireInTheWhole;
 			sourceTree = "<group>";
@@ -338,7 +350,7 @@
 				B73EC239205AA47A00879A48 /* Ground.swift in Sources */,
 				B7F381FE205EF4A300F7AB48 /* Point.swift in Sources */,
 				B7AA39E3205A745700ABE655 /* TileEnum.swift in Sources */,
-				B7B1478F2059C9CD000D0877 /* GameScene.swift in Sources */,
+				B7B1478F2059C9CD000D0877 /* PlayGroundScene.swift in Sources */,
 				B7B5F0E62088B4AD009A2473 /* PathService.swift in Sources */,
 				B7B147632059B9E1000D0877 /* GameViewController.swift in Sources */,
 				B73EC23F205BC46C00879A48 /* Global.swift in Sources */,
@@ -349,6 +361,10 @@
 				B76CF56F205FF81100C3FDA6 /* FIWError.swift in Sources */,
 				3E2FEFF42081666400A1EEB3 /* Droid.swift in Sources */,
 				B7B147942059CB97000D0877 /* Tile.swift in Sources */,
+				633208457CBB218FFC359B2A /* MainMenuScene.swift in Sources */,
+				633200FFF2935A12B152F65A /* BaseScene.swift in Sources */,
+				6332006EE15D283027ED001C /* GameScene.swift in Sources */,
+				6332012CFF2191C291820181 /* MenuService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

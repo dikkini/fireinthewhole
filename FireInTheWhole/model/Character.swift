@@ -46,7 +46,7 @@ class Character: Tile {
     }
 
     func move(path: [CGPoint], completion: @escaping (CGPoint) -> ()) {
-
+        self.action = TileAction.Move
         var prevPoint2D = self.position2D
         //var prevPoint25D = self.position
         var actions = [SKAction]()
@@ -94,6 +94,7 @@ class Character: Tile {
             // when all moves completed get tile index of new position2D and call callback
             let newTileIndexOfChar = point2DToPointTileIndex(point: (self.position2D), tileSize: GameLogic.tileSize)
             completion(newTileIndexOfChar)
+            self.action = TileAction.Idle
         }
     }
 

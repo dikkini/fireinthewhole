@@ -92,10 +92,8 @@ class TileService {
     }
 
     func updateTileMap(oldIndex: CGPoint, newIndex: CGPoint, oldType: TileType, newType: TileType) {
-        print(self.tileMap)
         self.tileMap[-Int(oldIndex.y)][Int(oldIndex.x)] = oldType.rawValue
         self.tileMap[-Int(newIndex.y)][Int(newIndex.x)] = newType.rawValue
-        print(self.tileMap)
     }
 
     func traversableTiles() -> [[Int]] {
@@ -128,6 +126,8 @@ class TileService {
         background.anchorPoint = CGPoint(x: 0.5, y: 0.5)
         background.zPosition = -999
         scene.addChild(background)
+
+        scene.anchorPoint = CGPoint(x: 0.5, y: 0.5)
 
         let deviceScale = scene.size.width / 667
 
@@ -189,7 +189,7 @@ class TileService {
         // clean highlights
         self.highlightPathLayer.removeAllChildren()
 
-        for var moveTI in moveTileIndexList {
+        for moveTI in moveTileIndexList {
             let movePoint25D = point2DTo25D(p: pointTileIndexToPoint2D(point: moveTI, tileSize: self.tileSize))
             var isChar = false
             for char in self.characterLayer.children {
@@ -271,10 +271,10 @@ class TileService {
     }
 
 
-    //         0,0 /\
-    //           /    \
-    // -32,-16   \    / 32,-16
-    //             \/
+    //        0,0 /\
+    //           /  \
+    // -32,-16   \  / 32,-16
+    //            \/
     //         0,-32
     // y=kx+b
     // k = -1/2, b = 0
@@ -289,8 +289,7 @@ class TileService {
 
         let top_lines = -modY + equalY
         let bottom_lines = modY - CGFloat(self.tileSize.height) + equalY
-        if (top_lines >= 0)
-                   && (bottom_lines <= 0) {
+        if top_lines >= 0 && bottom_lines <= 0 {
             return true
         } else {
             return false
