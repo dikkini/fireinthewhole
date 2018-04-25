@@ -8,19 +8,22 @@
 
 /* Begin PBXBuildFile section */
 		3E2FEFF42081666400A1EEB3 /* Droid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E2FEFF32081666400A1EEB3 /* Droid.swift */; };
-		3E5F9E5B206C4E1600D6D843 /* Fire.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E5F9E5A206C4E1600D6D843 /* Fire.swift */; };
 		6332006EE15D283027ED001C /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63320587CDD32DCFB167BCB9 /* GameScene.swift */; };
 		633200FFF2935A12B152F65A /* BaseScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 633209560D6DD1AE476D729B /* BaseScene.swift */; };
 		6332012CFF2191C291820181 /* MenuService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 633207648115F80E739E3353 /* MenuService.swift */; };
+		633203217598F918E1E30CA7 /* Global.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6332094E7BFAB1C0D9758C92 /* Global.swift */; };
+		6332064EECDFE77F53EC9088 /* TileEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63320805C9ED49F5A1E970DE /* TileEnum.swift */; };
+		6332068D82A82A0EA040E0D1 /* Fire.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6332034B4391C958C8A770D3 /* Fire.swift */; };
+		633206FDA67353F6C490DC5F /* LayersMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63320FE7365B2E86231E6DA8 /* LayersMap.swift */; };
 		633208457CBB218FFC359B2A /* MainMenuScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63320585F8D72AADF4601DAF /* MainMenuScene.swift */; };
+		63320C5D91057553B348257C /* Soldier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63320670E7B3552D810BD07D /* Soldier.swift */; };
+		63320CF9CB96B75DDD57ADA4 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63320E8E46D5CB2610B21A39 /* Utils.swift */; };
+		63320DEB75DB0B6CFF288E10 /* FIWError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63320CF55335C8122DE7FBEA /* FIWError.swift */; };
 		B73EC237205A877700879A48 /* Wall.swift in Sources */ = {isa = PBXBuildFile; fileRef = B73EC236205A877700879A48 /* Wall.swift */; };
 		B73EC239205AA47A00879A48 /* Ground.swift in Sources */ = {isa = PBXBuildFile; fileRef = B73EC238205AA47A00879A48 /* Ground.swift */; };
 		B73EC23B205AA48500879A48 /* Character.swift in Sources */ = {isa = PBXBuildFile; fileRef = B73EC23A205AA48500879A48 /* Character.swift */; };
-		B73EC23F205BC46C00879A48 /* Global.swift in Sources */ = {isa = PBXBuildFile; fileRef = B73EC23E205BC46C00879A48 /* Global.swift */; };
 		B73EC241205C070D00879A48 /* GameLogic.swift in Sources */ = {isa = PBXBuildFile; fileRef = B73EC240205C070D00879A48 /* GameLogic.swift */; };
-		B76CF56F205FF81100C3FDA6 /* FIWError.swift in Sources */ = {isa = PBXBuildFile; fileRef = B76CF56E205FF81100C3FDA6 /* FIWError.swift */; };
 		B7AA39E1205A6EFD00ABE655 /* TileService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7AA39E0205A6EFD00ABE655 /* TileService.swift */; };
-		B7AA39E3205A745700ABE655 /* TileEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7AA39E2205A745700ABE655 /* TileEnum.swift */; };
 		B7B1475B2059B9E1000D0877 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7B1475A2059B9E1000D0877 /* AppDelegate.swift */; };
 		B7B1475F2059B9E1000D0877 /* Actions.sks in Resources */ = {isa = PBXBuildFile; fileRef = B7B1475E2059B9E1000D0877 /* Actions.sks */; };
 		B7B147632059B9E1000D0877 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7B147622059B9E1000D0877 /* GameViewController.swift */; };
@@ -34,8 +37,6 @@
 		B7B147962059CF17000D0877 /* sprites.atlas in Resources */ = {isa = PBXBuildFile; fileRef = B7B147952059CF17000D0877 /* sprites.atlas */; };
 		B7B5F0E62088B4AD009A2473 /* PathService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7B5F0E52088B4AD009A2473 /* PathService.swift */; };
 		B7E14EAD2085FA45006AC265 /* menu.atlas in Resources */ = {isa = PBXBuildFile; fileRef = B7E14EAC2085FA39006AC265 /* menu.atlas */; };
-		B7F381FC205E346400F7AB48 /* LayersMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7F381FB205E346400F7AB48 /* LayersMap.swift */; };
-		B7F381FE205EF4A300F7AB48 /* Point.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7F381FD205EF4A300F7AB48 /* Point.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,19 +58,22 @@
 
 /* Begin PBXFileReference section */
 		3E2FEFF32081666400A1EEB3 /* Droid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Droid.swift; sourceTree = "<group>"; };
-		3E5F9E5A206C4E1600D6D843 /* Fire.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fire.swift; sourceTree = "<group>"; };
+		6332034B4391C958C8A770D3 /* Fire.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Fire.swift; sourceTree = "<group>"; };
 		63320585F8D72AADF4601DAF /* MainMenuScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainMenuScene.swift; sourceTree = "<group>"; };
 		63320587CDD32DCFB167BCB9 /* GameScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
+		63320670E7B3552D810BD07D /* Soldier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Soldier.swift; sourceTree = "<group>"; };
 		633207648115F80E739E3353 /* MenuService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuService.swift; sourceTree = "<group>"; };
+		63320805C9ED49F5A1E970DE /* TileEnum.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TileEnum.swift; sourceTree = "<group>"; };
+		6332094E7BFAB1C0D9758C92 /* Global.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Global.swift; sourceTree = "<group>"; };
 		633209560D6DD1AE476D729B /* BaseScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseScene.swift; sourceTree = "<group>"; };
+		63320CF55335C8122DE7FBEA /* FIWError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FIWError.swift; sourceTree = "<group>"; };
+		63320E8E46D5CB2610B21A39 /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
+		63320FE7365B2E86231E6DA8 /* LayersMap.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LayersMap.swift; sourceTree = "<group>"; };
 		B73EC236205A877700879A48 /* Wall.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Wall.swift; sourceTree = "<group>"; };
 		B73EC238205AA47A00879A48 /* Ground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ground.swift; sourceTree = "<group>"; };
 		B73EC23A205AA48500879A48 /* Character.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Character.swift; sourceTree = "<group>"; };
-		B73EC23E205BC46C00879A48 /* Global.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Global.swift; sourceTree = "<group>"; };
 		B73EC240205C070D00879A48 /* GameLogic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameLogic.swift; sourceTree = "<group>"; };
-		B76CF56E205FF81100C3FDA6 /* FIWError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FIWError.swift; sourceTree = "<group>"; };
 		B7AA39E0205A6EFD00ABE655 /* TileService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TileService.swift; sourceTree = "<group>"; };
-		B7AA39E2205A745700ABE655 /* TileEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TileEnum.swift; sourceTree = "<group>"; };
 		B7B147572059B9E1000D0877 /* FireInTheWhole.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FireInTheWhole.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B7B1475A2059B9E1000D0877 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B7B1475E2059B9E1000D0877 /* Actions.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Actions.sks; sourceTree = "<group>"; };
@@ -89,8 +93,6 @@
 		B7B147952059CF17000D0877 /* sprites.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = sprites.atlas; sourceTree = "<group>"; };
 		B7B5F0E52088B4AD009A2473 /* PathService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PathService.swift; sourceTree = "<group>"; };
 		B7E14EAC2085FA39006AC265 /* menu.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = menu.atlas; sourceTree = "<group>"; };
-		B7F381FB205E346400F7AB48 /* LayersMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayersMap.swift; sourceTree = "<group>"; };
-		B7F381FD205EF4A300F7AB48 /* Point.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Point.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -118,6 +120,32 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6332029226F2E36ABAB9AAA0 /* enum */ = {
+			isa = PBXGroup;
+			children = (
+				63320CF55335C8122DE7FBEA /* FIWError.swift */,
+				63320805C9ED49F5A1E970DE /* TileEnum.swift */,
+			);
+			path = enum;
+			sourceTree = "<group>";
+		};
+		6332049A759E4F2AF0585DD7 /* stucture */ = {
+			isa = PBXGroup;
+			children = (
+				6332094E7BFAB1C0D9758C92 /* Global.swift */,
+				63320FE7365B2E86231E6DA8 /* LayersMap.swift */,
+			);
+			path = stucture;
+			sourceTree = "<group>";
+		};
+		6332066933F049B377FDF46C /* protocol */ = {
+			isa = PBXGroup;
+			children = (
+				6332034B4391C958C8A770D3 /* Fire.swift */,
+			);
+			path = protocol;
+			sourceTree = "<group>";
+		};
 		B7AA39DF205A6EEC00ABE655 /* service */ = {
 			isa = PBXGroup;
 			children = (
@@ -166,6 +194,7 @@
 				63320585F8D72AADF4601DAF /* MainMenuScene.swift */,
 				633209560D6DD1AE476D729B /* BaseScene.swift */,
 				63320587CDD32DCFB167BCB9 /* GameScene.swift */,
+				63320E8E46D5CB2610B21A39 /* Utils.swift */,
 			);
 			path = FireInTheWhole;
 			sourceTree = "<group>";
@@ -191,18 +220,16 @@
 		B7B147902059CB40000D0877 /* model */ = {
 			isa = PBXGroup;
 			children = (
-				B7F381FB205E346400F7AB48 /* LayersMap.swift */,
 				B7B147932059CB97000D0877 /* Tile.swift */,
 				B73EC236205A877700879A48 /* Wall.swift */,
 				B73EC238205AA47A00879A48 /* Ground.swift */,
 				B73EC23A205AA48500879A48 /* Character.swift */,
-				B73EC23E205BC46C00879A48 /* Global.swift */,
 				B73EC240205C070D00879A48 /* GameLogic.swift */,
-				B76CF56E205FF81100C3FDA6 /* FIWError.swift */,
-				B7AA39E2205A745700ABE655 /* TileEnum.swift */,
-				B7F381FD205EF4A300F7AB48 /* Point.swift */,
-				3E5F9E5A206C4E1600D6D843 /* Fire.swift */,
 				3E2FEFF32081666400A1EEB3 /* Droid.swift */,
+				6332066933F049B377FDF46C /* protocol */,
+				6332029226F2E36ABAB9AAA0 /* enum */,
+				6332049A759E4F2AF0585DD7 /* stucture */,
+				63320670E7B3552D810BD07D /* Soldier.swift */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -348,23 +375,24 @@
 				B73EC23B205AA48500879A48 /* Character.swift in Sources */,
 				B7AA39E1205A6EFD00ABE655 /* TileService.swift in Sources */,
 				B73EC239205AA47A00879A48 /* Ground.swift in Sources */,
-				B7F381FE205EF4A300F7AB48 /* Point.swift in Sources */,
-				B7AA39E3205A745700ABE655 /* TileEnum.swift in Sources */,
 				B7B1478F2059C9CD000D0877 /* PlayGroundScene.swift in Sources */,
 				B7B5F0E62088B4AD009A2473 /* PathService.swift in Sources */,
 				B7B147632059B9E1000D0877 /* GameViewController.swift in Sources */,
-				B73EC23F205BC46C00879A48 /* Global.swift in Sources */,
-				B7F381FC205E346400F7AB48 /* LayersMap.swift in Sources */,
-				3E5F9E5B206C4E1600D6D843 /* Fire.swift in Sources */,
 				B73EC241205C070D00879A48 /* GameLogic.swift in Sources */,
 				B7B1475B2059B9E1000D0877 /* AppDelegate.swift in Sources */,
-				B76CF56F205FF81100C3FDA6 /* FIWError.swift in Sources */,
 				3E2FEFF42081666400A1EEB3 /* Droid.swift in Sources */,
 				B7B147942059CB97000D0877 /* Tile.swift in Sources */,
 				633208457CBB218FFC359B2A /* MainMenuScene.swift in Sources */,
 				633200FFF2935A12B152F65A /* BaseScene.swift in Sources */,
 				6332006EE15D283027ED001C /* GameScene.swift in Sources */,
 				6332012CFF2191C291820181 /* MenuService.swift in Sources */,
+				6332068D82A82A0EA040E0D1 /* Fire.swift in Sources */,
+				63320DEB75DB0B6CFF288E10 /* FIWError.swift in Sources */,
+				6332064EECDFE77F53EC9088 /* TileEnum.swift in Sources */,
+				63320CF9CB96B75DDD57ADA4 /* Utils.swift in Sources */,
+				633203217598F918E1E30CA7 /* Global.swift in Sources */,
+				633206FDA67353F6C490DC5F /* LayersMap.swift in Sources */,
+				63320C5D91057553B348257C /* Soldier.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

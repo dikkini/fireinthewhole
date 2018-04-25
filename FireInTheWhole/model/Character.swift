@@ -17,12 +17,14 @@ class Character: Tile {
 
     internal var canMove: Bool
     internal var canFire: Bool
+    internal var userControl: Bool
 
     init(type: TileType, action: TileAction, position2D: CGPoint, direction: TileDirection, imagePrefix: String? = nil,
-         lives: Int? = 5, canMove: Bool? = true, canFire: Bool? = false) {
+         lives: Int? = 5, canMove: Bool? = true, canFire: Bool? = false, userControl: Bool? = true) {
         self.canMove = canMove!
         self.canFire = canFire!
         self.lives = lives!
+        self.userControl = userControl!
 
         let texture = SKTexture(imageNamed: "lives_" + String(self.lives))
         self.livesSprite = SKSpriteNode(texture: texture, color: .clear, size: texture.size())

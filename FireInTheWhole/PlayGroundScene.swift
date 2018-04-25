@@ -47,12 +47,14 @@ class PlayGroundScene: BaseScene {
             return
         }
 
-        // нажимаем ли на меню
-        enumerateChildNodes(withName: "//*", using: { (node, stop) in
+        // обрабатываем нажатие на меню
+        enumerateChildNodes(withName: "action_menu/*", using: { (node, stop) in
             if node.name == "fire_btn" {
                 if node.contains(touch.location(in: self.menuService.menuLayer)) {
                     if self.selectedCharacter != nil && self.selectedCharacter is Droid && self.targetTile != nil {
-                        (self.selectedCharacter as? Droid)!.fire(targetTile: self.targetTile!)
+                        // убираем выделения ходьбы
+                        self.tileService.highlightPathLayer.removeAllChildren()
+                        // TODO подсветить клетки для стрельбы
                     }
                     return
                 }

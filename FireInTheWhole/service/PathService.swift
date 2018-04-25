@@ -34,7 +34,8 @@ class PathFinder {
         closedList = [String: PathNode]()
         path = [CGPoint]()
         
-        //invert y coordinates - pre conversion (spriteKit inverted coordinate system). This PathFnding code ONLY works with positive (absolute) values
+        // invert y coordinates - pre conversion (spriteKit inverted coordinate system).
+        // This PathFnding code ONLY works with positive (absolute) values
         
         iniY = -iniY
         finY = -finY
@@ -72,7 +73,8 @@ class PathFinder {
             let curF = obj.1.g + obj.1.h
             
             //currently this is just a brute force loop through every item in the list
-            //can be sped up using a sorted list or binary heap, described http://www.policyalmanac.org/games/binaryHeaps.htm
+            //can be sped up using a sorted list or binary heap,
+            //described http://www.policyalmanac.org/games/binaryHeaps.htm
             //example http://www.gotoandplay.it/_articles/2005/04/mazeChaser.php
             
             if (lowF > curF) {

@@ -25,7 +25,8 @@ class MainMenuScene: BaseScene {
 
         self.newGameButton.fontColor = SKColor.black
         self.newGameButton.text = "new game"
-        self.newGameButton.position = CGPoint(x: size.width / 2, y: size.height / 2  - self.playgroundButton.fontSize * 2 + 50)
+        self.newGameButton.position = CGPoint(x: size.width / 2,
+                y: size.height / 2  - self.playgroundButton.fontSize * 2 + 50)
 
         self.addChild(self.playgroundButton)
         self.addChild(self.newGameButton)

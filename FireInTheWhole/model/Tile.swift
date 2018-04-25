@@ -20,7 +20,8 @@ class Tile: SKSpriteNode {
         fatalError("init(coder:) has not been implemented")
     }
 
-    init(type: TileType, action: TileAction = TileAction.Idle, position2D: CGPoint, direction: TileDirection? = nil, imagePrefix: String? = nil) {
+    init(type: TileType, action: TileAction = TileAction.Idle, position2D: CGPoint, direction: TileDirection? = nil,
+         imagePrefix: String? = nil) {
         self.type = type
         self.direction = direction
         self.action = action
@@ -37,9 +38,8 @@ class Tile: SKSpriteNode {
         if self.direction != nil {
             image += "_" + self.direction!.name
         }
-        image += "@2x.png"
-        var texture = SKTexture(imageNamed: image)
 
+        let texture = SKTexture(imageNamed: image)
         super.init(texture: texture, color: .clear, size: texture.size())
     }
 
@@ -69,7 +69,7 @@ class Tile: SKSpriteNode {
         if self.direction != nil {
             image += "_" + self.direction!.name
         }
-        image += "@2x.png"
+
         return SKTexture(imageNamed: image)
     }
 

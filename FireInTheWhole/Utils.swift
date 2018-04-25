@@ -1,5 +1,5 @@
 //
-//  Point.swift
+//  Utils.swift
 //  FireInTheWhole
 //
 //  Created by dikkini on 18/03/2018.

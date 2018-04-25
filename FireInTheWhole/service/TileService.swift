@@ -54,7 +54,8 @@ class TileService {
                 let groundName = NSUUID().uuidString
 
                 let position2D = CGPoint(x: (j * self.tileSize.width), y: -(i * tileSize.height))
-                let ground = Ground.init(type: TileType.Ground, action: TileAction.Idle, position2D: position2D, imagePrefix: "iso_")
+                let ground = Ground.init(type: TileType.Ground, action: TileAction.Idle, position2D: position2D,
+                        imagePrefix: "iso_")
                 ground.name = groundName
                 ground.position = point2DTo25D(p: CGPoint(x: (j * self.tileSize.width), y: -(i * self.tileSize.height)))
                 ground.anchorPoint = CGPoint(x: 0.5, y: 0.5)
@@ -64,7 +65,8 @@ class TileService {
                 if (i == 2 && j == 1) || (i == 4 && j == 3) {
                     let charName = NSUUID().uuidString
 
-                    let char = Droid.init(type: TileType.Character, action: TileAction.Idle, position2D: position2D, direction: TileDirection.E, imagePrefix: "iso_3d_", canMove: true)
+                    let char = Droid.init(type: TileType.Character, action: TileAction.Idle, position2D: position2D,
+                            direction: TileDirection.E, imagePrefix: "iso_3d_", canMove: true)
                     char.name = charName
                     char.position = point2DTo25D(p: CGPoint(x: (j * self.tileSize.width), y: -(i * self.tileSize.height)))
                     char.anchorPoint = CGPoint(x: 0.5, y: 0.5)
@@ -74,9 +76,11 @@ class TileService {
                 } else if i == 4 && j == 4 {
                     let charName = NSUUID().uuidString
 
-                    let droid = Droid.init(type: TileType.Character, action: TileAction.Idle, position2D: position2D, direction: TileDirection.E, imagePrefix: "iso_3d_", canMove: true, canFire: true)
+                    let droid = Droid.init(type: TileType.Character, action: TileAction.Idle, position2D: position2D,
+                            direction: TileDirection.E, imagePrefix: "iso_3d_", canMove: true, canFire: true)
                     droid.name = charName
-                    droid.position = point2DTo25D(p: CGPoint(x: (j * self.tileSize.width), y: -(i * self.tileSize.height)))
+                    droid.position = point2DTo25D(p: CGPoint(x: (j * self.tileSize.width),
+                            y: -(i * self.tileSize.height)))
                     droid.anchorPoint = CGPoint(x: 0.5, y: 0.5)
 
                     self.characterLayer.addChild(droid)
@@ -179,7 +183,8 @@ class TileService {
             n_degrees += 360
         }
 
-        let directions = [TileDirection.N, TileDirection.NE, TileDirection.E, TileDirection.SE, TileDirection.S, TileDirection.SW, TileDirection.W, TileDirection.NW]
+        let directions = [TileDirection.N, TileDirection.NE, TileDirection.E, TileDirection.SE, TileDirection.S,
+                          TileDirection.SW, TileDirection.W, TileDirection.NW]
         let index = Int((n_degrees + 22.5) / 45.0) & 7
         let d = directions[index]
         return d
@@ -206,7 +211,8 @@ class TileService {
 
     func visualizePath(movePoint25D: CGPoint, test: Bool? = false) {
         // 25D
-        let highlightTile = Ground.init(type: TileType.Ground, action: TileAction.Idle, position2D: point25DTo2D(p: movePoint25D), imagePrefix: "iso_")
+        let highlightTile = Ground.init(type: TileType.Ground, action: TileAction.Idle,
+                position2D: point25DTo2D(p: movePoint25D), imagePrefix: "iso_")
         highlightTile.position = movePoint25D
         highlightTile.anchorPoint = CGPoint(x: 0.5, y: 0.5)
 
@@ -262,7 +268,8 @@ class TileService {
                    && (Int(to.x) < traversable.count)
                    && (Int(-to.y) >= 0)
                    && (Int(-to.y) < traversable.count) {
-            let pathFinder = PathFinder(xIni: Int(from.x), yIni: Int(from.y), xFin: Int(to.x), yFin: Int(to.y), lvlData: traversable)
+            let pathFinder = PathFinder(xIni: Int(from.x), yIni: Int(from.y), xFin: Int(to.x), yFin: Int(to.y),
+                    lvlData: traversable)
             let myPath = pathFinder.findPath()
             return myPath
         } else {
